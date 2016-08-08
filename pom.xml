@@ -43,6 +43,7 @@
         <module>cloudfoundry-maven-plugin</module>
         <module>cloudfoundry-operations</module>
         <module>cloudfoundry-util</module>
+        <module>immutables-encodings</module>
         <module>integration-test</module>
     </modules>
 
@@ -96,6 +97,11 @@
                 <groupId>io.projectreactor.ipc</groupId>
                 <artifactId>reactor-netty</artifactId>
                 <version>${reactor-netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.immutables</groupId>
+                <artifactId>encode</artifactId>
+                <version>${immutables.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.immutables</groupId>

@@ -35,6 +35,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.cloudfoundry</groupId>
+            <artifactId>immutables-encodings</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <scope>provided</scope>
