@@ -17,9 +17,10 @@
 package org.cloudfoundry.uaa.clients;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.uaa.IdentityZoned;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for Update Metadata
@@ -31,15 +32,13 @@ abstract class _UpdateMetadataRequest implements IdentityZoned {
      * Base64 encoded image file
      */
     @JsonProperty("appIcon")
-    @Nullable
-    abstract String getAppIcon();
+    abstract Optional<String> getAppIcon();
 
     /**
      * URL to which the app is linked
      */
     @JsonProperty("appLaunchUrl")
-    @Nullable
-    abstract String getAppLaunchUrl();
+    abstract Optional<String> getAppLaunchUrl();
 
     /**
      * Client identifier, unique within identity zone
@@ -51,14 +50,12 @@ abstract class _UpdateMetadataRequest implements IdentityZoned {
      * Client name
      */
     @JsonProperty("clientName")
-    @Nullable
-    abstract String getClientName();
+    abstract Optional<String> getClientName();
 
     /**
      * Flag to control visibility on home page
      */
     @JsonProperty("showOnHomePage")
-    @Nullable
-    abstract Boolean getShowOnHomePage();
+    abstract Optional<Boolean> getShowOnHomePage();
 
 }

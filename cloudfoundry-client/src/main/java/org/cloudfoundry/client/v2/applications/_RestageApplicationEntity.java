@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The response entity payload for the Restage an Application operation
@@ -34,29 +35,25 @@ abstract class _RestageApplicationEntity extends AbstractApplicationEntity {
      * The detected buildpack
      */
     @JsonProperty("detected_buildpack")
-    @Nullable
-    abstract String getDetectedBuildpack();
+    abstract Optional<String> getDetectedBuildpack();
 
     /**
      * Whether SSH is enabled
      */
     @JsonProperty("enable_ssh")
-    @Nullable
-    abstract Boolean getEnableSsh();
+    abstract Optional<Boolean> getEnableSsh();
 
     /**
      * The package state
      */
     @JsonProperty("package_state")
-    @Nullable
-    abstract String getPackageState();
+    abstract Optional<String> getPackageState();
 
     /**
      * When the package was update
      */
     @JsonProperty("package_updated_at")
-    @Nullable
-    abstract String getPackageUpdatedAt();
+    abstract Optional<String> getPackageUpdatedAt();
 
     /**
      * The ports
@@ -69,7 +66,6 @@ abstract class _RestageApplicationEntity extends AbstractApplicationEntity {
      * The version
      */
     @JsonProperty("version")
-    @Nullable
-    abstract String getVersion();
+    abstract Optional<String> getVersion();
 
 }

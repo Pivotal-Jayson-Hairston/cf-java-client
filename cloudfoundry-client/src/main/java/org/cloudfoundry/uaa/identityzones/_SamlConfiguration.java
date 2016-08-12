@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityzones;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The payload for the identity zone saml configuration
@@ -32,56 +33,48 @@ abstract class _SamlConfiguration {
      * If true, the SAML provider will sign all assertions.
      */
     @JsonProperty("assertionSigned")
-    @Nullable
-    abstract Boolean getAssertionSigned();
+    abstract Optional<Boolean> getAssertionSigned();
 
     /**
      * The lifetime of a SAML assertion in seconds.
      */
-    @Nullable
     @JsonProperty("assertionTimeToLiveSeconds")
-    abstract Integer getAssertionTimeToLive();
+    abstract Optional<Integer> getAssertionTimeToLive();
 
     /**
      * Exposed SAML metadata property. The certificate used to sign all communications.
      */
     @JsonProperty("certificate")
-    @Nullable
-    abstract String getCertificate();
+    abstract Optional<String> getCertificate();
 
     /**
      * Exposed SAML metadata property. The SAML provider’s private key.
      */
     @JsonProperty("privateKey")
-    @Nullable
-    abstract String getPrivateKey();
+    abstract Optional<String> getPrivateKey();
 
     /**
      * Exposed SAML metadata property. The SAML provider’s private key password. Reserved for future use.
      */
     @JsonProperty("privateKeyPassword")
-    @Nullable
-    abstract String getPrivateKeyPassword();
+    abstract Optional<String> getPrivateKeyPassword();
 
     /**
      * Exposed SAML metadata property. If true, the service provider will sign all outgoing authentication requests.
      */
     @JsonProperty("requestSigned")
-    @Nullable
-    abstract Boolean getRequestSigned();
+    abstract Optional<Boolean> getRequestSigned();
 
     /**
      * Exposed SAML metadata property. If true, all assertions received by the SAML provider must be signed.
      */
     @JsonProperty("wantAssertionSigned")
-    @Nullable
-    abstract Boolean getWantAssertionSigned();
+    abstract Optional<Boolean> getWantAssertionSigned();
 
     /**
      * If true, the authentication request from the partner service provider must be signed.
      */
     @JsonProperty("wantAuthnRequestSigned")
-    @Nullable
-    abstract Boolean getWantPartnerAuthenticationRequestSigned();
+    abstract Optional<Boolean> getWantPartnerAuthenticationRequestSigned();
 
 }

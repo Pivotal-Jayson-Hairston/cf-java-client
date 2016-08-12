@@ -16,11 +16,11 @@
 
 package org.cloudfoundry.doppler;
 
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -33,11 +33,11 @@ abstract class _HttpStartStop {
         Objects.requireNonNull(dropsonde, "dropsonde");
 
         return HttpStartStop.builder()
-            .applicationId(UuidUtils.from(dropsonde.applicationId))
+            .applicationId(Optional.ofNullable(UuidUtils.from(dropsonde.applicationId)))
             .contentLength(dropsonde.contentLength)
             .forwarded(dropsonde.forwarded)
-            .instanceId(dropsonde.instanceId)
-            .instanceIndex(dropsonde.instanceIndex)
+            .instanceId(Optional.ofNullable(dropsonde.instanceId))
+            .instanceIndex(Optional.ofNullable(dropsonde.instanceIndex))
             .method(Method.from(dropsonde.method))
             .peerType(PeerType.from(dropsonde.peerType))
             .remoteAddress(dropsonde.remoteAddress)
@@ -53,8 +53,7 @@ abstract class _HttpStartStop {
     /**
      * The application id
      */
-    @Nullable
-    abstract UUID getApplicationId();
+    abstract Optional<UUID> getApplicationId();
 
     /**
      * The length of the response in bytes
@@ -69,14 +68,12 @@ abstract class _HttpStartStop {
     /**
      * The ID of the application instance
      */
-    @Nullable
-    abstract String getInstanceId();
+    abstract Optional<String> getInstanceId();
 
     /**
      * The index of the application instance
      */
-    @Nullable
-    abstract Integer getInstanceIndex();
+    abstract Optional<Integer> getInstanceIndex();
 
     /**
      * The method of the request

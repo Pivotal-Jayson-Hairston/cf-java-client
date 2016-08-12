@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityzones;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The payload for the identity zone links
@@ -32,14 +33,12 @@ abstract class _Links {
      * The logout link
      */
     @JsonProperty("logout")
-    @Nullable
-    abstract LogoutLink getLogout();
+    abstract Optional<LogoutLink> getLogout();
 
     /**
      * The self service link
      */
     @JsonProperty("selfService")
-    @Nullable
-    abstract SelfServiceLink getSelfService();
+    abstract Optional<SelfServiceLink> getSelfService();
 
 }

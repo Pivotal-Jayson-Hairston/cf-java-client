@@ -807,7 +807,7 @@ public final class ApplicationsTest extends AbstractIntegrationTest {
 
     private static Mono<CreateRouteResponse> createApplicationRoute(CloudFoundryClient cloudFoundryClient, String organizationId, String spaceId, String domainName, String applicationId) {
         return createRouteWithDomain(cloudFoundryClient, organizationId, spaceId, domainName, "test-host", "/test-path")
-            .then(createRouteResponse -> requestAssociateRoute(cloudFoundryClient, applicationId, createRouteResponse.getMetadata().getId())
+            .then(createRouteResponse -> requestAssociateRoute(cloudFoundryClient, applicationId, ResourceUtils.getId(createRouteResponse))
                 .map(response -> createRouteResponse));
     }
 
@@ -997,7 +997,7 @@ public final class ApplicationsTest extends AbstractIntegrationTest {
 
     private static Mono<AbstractApplicationResource> waitForStagingApplication(CloudFoundryClient cloudFoundryClient, String applicationId) {
         return requestGetApplication(cloudFoundryClient, applicationId)
-            .filter(response -> "STAGED".equals(response.getEntity().getPackageState()))
+            .filter(response -> "STAGED".equals(ResourceUtils.getEntity(response).getPackageState()))
             .repeatWhenEmpty(exponentialBackOff(Duration.ofSeconds(1), Duration.ofSeconds(15), Duration.ofMinutes(5)));
     }
 

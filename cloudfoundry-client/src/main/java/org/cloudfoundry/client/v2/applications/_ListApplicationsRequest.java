@@ -23,6 +23,7 @@ import org.cloudfoundry.client.v2.PaginatedRequest;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The request payload for the List all Apps operation
@@ -34,8 +35,7 @@ abstract class _ListApplicationsRequest extends PaginatedRequest {
      * The diego flag
      */
     @IsFilterParameter("diego")
-    @Nullable
-    abstract Boolean getDiego();
+    abstract Optional<Boolean> getDiego();
 
     /**
      * The names

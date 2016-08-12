@@ -16,9 +16,10 @@
 
 package org.cloudfoundry.uaa.tokens;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the get token by OpenId operation
@@ -47,15 +48,13 @@ abstract class _GetTokenByOpenIdRequest {
     /**
      * The redirection URI
      */
-    @Nullable
     @QueryParameter("redirect_uri")
-    abstract String getRedirectUri();
+    abstract Optional<String> getRedirectUri();
 
     /**
      * The token format
      */
-    @Nullable
     @QueryParameter("token_format")
-    abstract TokenFormat getTokenFormat();
+    abstract Optional<TokenFormat> getTokenFormat();
 
 }

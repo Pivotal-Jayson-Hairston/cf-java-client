@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The payload for the identity zone token policy
@@ -34,22 +35,19 @@ abstract class _TokenPolicy {
      * Time in seconds between when a access token is issued and when it expires
      */
     @JsonProperty("accessTokenValidity")
-    @Nullable
-    abstract Integer getAccessTokenValidity();
+    abstract Optional<Integer> getAccessTokenValidity();
 
     /**
      * The ID of the key that is used to sign tokens
      */
     @JsonProperty("activeKeyId")
-    @Nullable
-    abstract String getActiveKeyId();
+    abstract Optional<String> getActiveKeyId();
 
     /**
      * Whether the JWT token is revocable
      */
     @JsonProperty("jwtRevocable")
-    @Nullable
-    abstract Boolean getJwtRevocable();
+    abstract Optional<Boolean> getJwtRevocable();
 
     /**
      * The keys of the token policy
@@ -62,7 +60,6 @@ abstract class _TokenPolicy {
      * Time in seconds between when a refresh token is issued and when it expires
      */
     @JsonProperty("refreshTokenValidity")
-    @Nullable
-    abstract Integer getRefreshTokenValidity();
+    abstract Optional<Integer> getRefreshTokenValidity();
 
 }

@@ -17,9 +17,10 @@
 package org.cloudfoundry.uaa.identityproviders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.uaa.IdentityZoned;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the create identity provider
@@ -31,15 +32,13 @@ abstract class _CreateIdentityProviderRequest implements IdentityZoned {
      * Whether the identity provider is active
      */
     @JsonProperty("active")
-    @Nullable
-    abstract Boolean getActive();
+    abstract Optional<Boolean> getActive();
 
     /**
      * The configuration of this identity provider according to its type.
      */
     @JsonProperty("config")
-    @Nullable
-    abstract IdentityProviderConfiguration getConfiguration();
+    abstract Optional<IdentityProviderConfiguration> getConfiguration();
 
     /**
      * Human-readable name for this provider

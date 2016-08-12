@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The metadata payload entities
@@ -32,21 +33,18 @@ abstract class _Metadata {
      * When the resource record was created
      */
     @JsonProperty("created")
-    @Nullable
-    abstract String getCreated();
+    abstract Optional<String> getCreated();
 
     /**
      * When the resource record was last modified
      */
     @JsonProperty("lastModified")
-    @Nullable
-    abstract String getLastModified();
+    abstract Optional<String> getLastModified();
 
     /**
      * The metadata version
      */
     @JsonProperty("version")
-    @Nullable
-    abstract Integer getVersion();
+    abstract Optional<Integer> getVersion();
 
 }

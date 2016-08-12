@@ -16,6 +16,7 @@
 
 package org.cloudfoundry.util;
 
+import org.cloudfoundry.client.v3.Pagination;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -92,11 +93,17 @@ public final class PaginationUtils {
     }
 
     private static <T extends org.cloudfoundry.client.v2.PaginatedResponse<?>> Function<T, Flux<T>> requestClientV2AdditionalPages(Function<Integer, Mono<T>> pageSupplier) {
-        return requestAdditionalPages(pageSupplier, response -> response.getTotalPages().orElse(1));
+        return requestAdditionalPages(pageSupplier, response -> response.getTotalPages()
+            .orElse(1));
     }
 
     private static <T extends org.cloudfoundry.client.v3.PaginatedResponse<?>> Function<T, Flux<T>> requestClientV3AdditionalPages(Function<Integer, Mono<T>> pageSupplier) {
-        return requestAdditionalPages(pageSupplier, response -> response.getPagination().getTotalPages());
+        return requestAdditionalPages(pageSupplier, response -> response.getPagination()
+            .orElse(Pagination.builder()
+                .totalPages(1)
+                .build())
+            .getTotalPages()
+            .orElse(1));
     }
 
     private static <T extends org.cloudfoundry.uaa.PaginatedResponse<?>> Function<T, Flux<T>> requestUaaAdditionalPages(Function<Integer, Mono<T>> pageSupplier) {

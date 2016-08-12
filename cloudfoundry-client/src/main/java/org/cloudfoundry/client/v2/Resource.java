@@ -17,7 +17,8 @@
 package org.cloudfoundry.client.v2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
+
+import java.util.Optional;
 
 /**
  * The resource payload for a paginated response
@@ -30,14 +31,12 @@ public abstract class Resource<T> {
      * The resource's entity
      */
     @JsonProperty("entity")
-    @Nullable
-    public abstract T getEntity();
+    public abstract Optional<T> getEntity();
 
     /**
      * The resource's metadata
      */
     @JsonProperty("metadata")
-    @Nullable
-    public abstract Metadata getMetadata();
+    public abstract Optional<Metadata> getMetadata();
 
 }

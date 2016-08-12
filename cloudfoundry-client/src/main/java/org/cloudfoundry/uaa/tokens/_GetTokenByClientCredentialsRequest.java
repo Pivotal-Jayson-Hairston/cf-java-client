@@ -16,9 +16,10 @@
 
 package org.cloudfoundry.uaa.tokens;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the get token by client credentials operation
@@ -41,8 +42,7 @@ abstract class _GetTokenByClientCredentialsRequest {
     /**
      * The token format
      */
-    @Nullable
     @QueryParameter("token_format")
-    abstract TokenFormat getTokenFormat();
+    abstract Optional<TokenFormat> getTokenFormat();
 
 }

@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityproviders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The payload for the OpenId Connect (oidc) identity provider configuration
@@ -32,7 +33,6 @@ abstract class _OpenIdConnectConfiguration extends AbstractAuthenticationConfigu
      * The Open Id user info endpoint URL. Reserved for future OIDC use.
      */
     @JsonProperty("userInfoUrl")
-    @Nullable
-    abstract String getUserInfoUrl();
+    abstract Optional<String> getUserInfoUrl();
 
 }

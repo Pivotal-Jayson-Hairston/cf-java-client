@@ -16,9 +16,10 @@
 
 package org.cloudfoundry.uaa.authorizations;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for authorization with an authorization code grant operation
@@ -35,15 +36,13 @@ abstract class _AuthorizeByAuthorizationCodeGrantApiRequest {
     /**
      * Redirection URI to which the authorization server will send the user-agent back once access is granted (or denied), optional if pre-registered by the client
      */
-    @Nullable
     @QueryParameter("redirect_uri")
-    abstract String getRedirectUri();
+    abstract Optional<String> getRedirectUri();
 
     /**
      * Any random string to be returned in the Location header as a query parameter, used to achieve per-request customization
      */
-    @Nullable
     @QueryParameter("state")
-    abstract String getState();
+    abstract Optional<String> getState();
 
 }

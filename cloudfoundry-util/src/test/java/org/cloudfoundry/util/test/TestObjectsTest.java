@@ -77,7 +77,6 @@ public final class TestObjectsTest {
 
     @Test
     public void fillResource() {
-
         ApplicationResource actual = fill(ApplicationResource.builder()).build();
         ApplicationResource expected = ApplicationResource.builder()
             .entity(fill(ApplicationEntity.builder()).build())

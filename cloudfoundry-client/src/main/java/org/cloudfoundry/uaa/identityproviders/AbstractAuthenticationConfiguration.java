@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The payload for the oauth/oidc identity provider configuration
@@ -30,8 +31,7 @@ abstract class AbstractAuthenticationConfiguration extends AbstractExternalIdent
      * Determines whether or not shadow users must be created before login by an administrator.
      */
     @JsonProperty("addShadowUserOnLogin")
-    @Nullable
-    abstract Boolean getAddShadowUserOnLogin();
+    abstract Optional<Boolean> getAddShadowUserOnLogin();
 
     /**
      * The OAuth 2.0 authorization endpoint URL
@@ -43,8 +43,7 @@ abstract class AbstractAuthenticationConfiguration extends AbstractExternalIdent
      * Text to use for the login link to the provider
      */
     @JsonProperty("linkText")
-    @Nullable
-    abstract Boolean getLinkText();
+    abstract Optional<Boolean> getLinkText();
 
     /**
      * The client ID which is registered with the external OAuth provider for use by the UAA
@@ -70,29 +69,25 @@ abstract class AbstractAuthenticationConfiguration extends AbstractExternalIdent
      * A flag controlling whether a link to this provider’s login will be shown on the UAA login page
      */
     @JsonProperty("showLinkText")
-    @Nullable
-    abstract Boolean getShowLinkText();
+    abstract Optional<Boolean> getShowLinkText();
 
     /**
      * Skips validation of the LDAP cert if set to true.
      */
     @JsonProperty("skipSslValidation")
-    @Nullable
-    abstract Boolean getSkipSslVerification();
+    abstract Optional<Boolean> getSkipSslVerification();
 
     /**
      * A verification key for validating token signatures
      */
     @JsonProperty("tokenKey")
-    @Nullable
-    abstract String getTokenKey();
+    abstract Optional<String> getTokenKey();
 
     /**
      * The URL of the token key endpoint which renders a verification key for validating token signatures
      */
     @JsonProperty("tokenKeyUrl")
-    @Nullable
-    abstract String getTokenKeyUrl();
+    abstract Optional<String> getTokenKeyUrl();
 
     /**
      * The OAuth 2.0 authorization endpoint URL

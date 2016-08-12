@@ -16,9 +16,6 @@
 
 package org.cloudfoundry.reactor;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -29,7 +26,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.HttpClient;
 
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractRestTest {
@@ -37,11 +33,7 @@ public abstract class AbstractRestTest {
     protected static final ConnectionContext CONNECTION_CONTEXT = DefaultConnectionContext.builder()
         .apiHost("localhost")
         .httpClient(HttpClient.create())
-        .objectMapper(new ObjectMapper()
-            .addHandler(new FailingDeserializationProblemHandler())
-            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-            .registerModule(new Jdk8Module())
-            .setSerializationInclusion(NON_NULL))
+        .problemHandler(new FailingDeserializationProblemHandler())
         .build();
 
     protected static final TokenProvider TOKEN_PROVIDER = connectionContext -> Mono.just("test-authorization");

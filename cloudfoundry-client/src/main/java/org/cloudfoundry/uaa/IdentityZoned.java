@@ -17,7 +17,8 @@
 package org.cloudfoundry.uaa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.cloudfoundry.Nullable;
+
+import java.util.Optional;
 
 /**
  * An interface that indicates that a UAA request can specify an identity zone in its header
@@ -30,7 +31,6 @@ public interface IdentityZoned {
      * @return the identity zone id
      */
     @JsonIgnore
-    @Nullable
-    String getIdentityZoneId();
+    Optional<String> getIdentityZoneId();
 
 }

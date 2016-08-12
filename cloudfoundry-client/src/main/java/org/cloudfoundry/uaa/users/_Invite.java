@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * An invite for a new user
@@ -38,29 +39,25 @@ abstract class _Invite {
      * The error code
      */
     @JsonProperty("errorCode")
-    @Nullable
-    abstract String getErrorCode();
+    abstract Optional<String> getErrorCode();
 
     /**
      * The error message
      */
     @JsonProperty("errorMessage")
-    @Nullable
-    abstract String getErrorMessage();
+    abstract Optional<String> getErrorMessage();
 
     /**
      * The invite link
      */
     @JsonProperty("inviteLink")
-    @Nullable
-    abstract String getInviteLink();
+    abstract Optional<String> getInviteLink();
 
     /**
      * The origin
      */
     @JsonProperty("origin")
-    @Nullable
-    abstract String getOrigin();
+    abstract Optional<String> getOrigin();
 
     /**
      * Whether the invite was sent successfully
@@ -72,7 +69,6 @@ abstract class _Invite {
      * The user id
      */
     @JsonProperty("userId")
-    @Nullable
-    abstract String getUserId();
+    abstract Optional<String> getUserId();
 
 }

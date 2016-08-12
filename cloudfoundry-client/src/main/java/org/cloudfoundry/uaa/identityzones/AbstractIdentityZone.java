@@ -17,7 +17,8 @@
 package org.cloudfoundry.uaa.identityzones;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
+
+import java.util.Optional;
 
 /**
  * The entity response payload for Identity Zone
@@ -28,8 +29,7 @@ public abstract class AbstractIdentityZone {
      * The configuration
      */
     @JsonProperty("config")
-    @Nullable
-    abstract IdentityZoneConfiguration getConfiguration();
+    abstract Optional<IdentityZoneConfiguration> getConfiguration();
 
     /**
      * The creation date of the identity zone
@@ -41,8 +41,7 @@ public abstract class AbstractIdentityZone {
      * The description of the identity zone
      */
     @JsonProperty("description")
-    @Nullable
-    abstract String getDescription();
+    abstract Optional<String> getDescription();
 
     /**
      * The id of the identity zone
@@ -72,7 +71,6 @@ public abstract class AbstractIdentityZone {
      * The version of the identity zone.
      */
     @JsonProperty("version")
-    @Nullable
-    abstract Integer getVersion();
+    abstract Optional<Integer> getVersion();
 
 }

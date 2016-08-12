@@ -349,13 +349,13 @@ public final class DefaultServices implements Services {
     private static Mono<Optional<String>> checkVisibility(CloudFoundryClient cloudFoundryClient, String organizationId, ServicePlanResource resource) {
         String servicePlanId = ResourceUtils.getId(resource);
 
-        if (resource.getEntity().getPubliclyVisible()) {
+        if (ResourceUtils.getEntity(resource).getPubliclyVisible()) {
             return Mono.just(Optional.of(servicePlanId));
         }
 
         return requestListServicePlanVisibilities(cloudFoundryClient, organizationId, servicePlanId)
             .next()
-            .otherwiseIfEmpty(ExceptionUtils.illegalArgument("Service Plan %s is not visible to your organization", resource.getEntity().getName()))
+            .otherwiseIfEmpty(ExceptionUtils.illegalArgument("Service Plan %s is not visible to your organization", ResourceUtils.getEntity(resource).getName()))
             .then(Mono.just(Optional.of(servicePlanId)));
     }
 
@@ -426,18 +426,18 @@ public final class DefaultServices implements Services {
             return Mono.just(Optional.empty());
         }
 
-        String servicePlanId = serviceInstance.getEntity().getServicePlanId();
+        String servicePlanId = ResourceUtils.getEntity(serviceInstance).getServicePlanId();
 
         if (servicePlanId == null || servicePlanId.isEmpty()) {
-            return ExceptionUtils.illegalArgument("Plan does not exist for the %s service", serviceInstance.getEntity().getName());
+            return ExceptionUtils.illegalArgument("Plan does not exist for the %s service", ResourceUtils.getEntity(serviceInstance).getName());
         }
 
         return getServiceId(cloudFoundryClient, servicePlanId)
             .then(serviceId -> requestGetService(cloudFoundryClient, serviceId))
             .filter(DefaultServices::isPlanUpdateable)
-            .otherwiseIfEmpty(ExceptionUtils.illegalArgument("Plan for the %s service cannot be updated", serviceInstance.getEntity().getName()))
+            .otherwiseIfEmpty(ExceptionUtils.illegalArgument("Plan for the %s service cannot be updated", ResourceUtils.getEntity(serviceInstance).getName()))
             .flatMap(response -> requestListServicePlans(cloudFoundryClient, ResourceUtils.getId(response)))
-            .filter(resource -> planName.equals(resource.getEntity().getName()))
+            .filter(resource -> planName.equals(ResourceUtils.getEntity(resource).getName()))
             .singleOrEmpty()
             .otherwiseIfEmpty(ExceptionUtils.illegalArgument("New service plan %s not found", planName))
             .then(resource -> checkVisibility(cloudFoundryClient, organizationId, resource));
@@ -460,7 +460,7 @@ public final class DefaultServices implements Services {
 
     private static Mono<String> getServiceId(CloudFoundryClient cloudFoundryClient, String servicePlanId) {
         return requestGetServicePlan(cloudFoundryClient, servicePlanId)
-            .map(response -> response.getEntity().getServiceId());
+            .map(response -> ResourceUtils.getEntity(response).getServiceId());
     }
 
     private static Mono<String> getServiceIdByName(CloudFoundryClient cloudFoundryClient, String spaceId, String service) {
@@ -524,7 +524,7 @@ public final class DefaultServices implements Services {
     }
 
     private static boolean isPlanUpdateable(GetServiceResponse response) {
-        return response.getEntity().getPlanUpdateable();
+        return ResourceUtils.getEntity(response).getPlanUpdateable();
     }
 
     private static boolean isUserProvidedService(UnionServiceInstanceResource serviceInstance) {
@@ -769,7 +769,7 @@ public final class DefaultServices implements Services {
     private static ServiceInstance toServiceInstance(UnionServiceInstanceResource resource, Optional<String> plan, List<String> applications, ServiceEntity serviceEntity) {
         String extra = Optional.ofNullable(serviceEntity.getExtra()).orElse("");
         Optional<String> documentationUrl = Optional.ofNullable(getExtraValue(extra, "documentationUrl"));
-        UnionServiceInstanceEntity serviceInstanceEntity = resource.getEntity();
+        UnionServiceInstanceEntity serviceInstanceEntity = ResourceUtils.getEntity(resource);
         LastOperation lastOperation = Optional
             .ofNullable(serviceInstanceEntity.getLastOperation())
             .orElse(LastOperation.builder()
@@ -805,7 +805,7 @@ public final class DefaultServices implements Services {
     }
 
     private static ServiceOffering toServiceOffering(ServiceResource resource, List<ServicePlanResource> servicePlans) {
-        ServiceEntity entity = resource.getEntity();
+        ServiceEntity entity = ResourceUtils.getEntity(resource);
 
         return ServiceOffering.builder()
             .description(entity.getDescription())

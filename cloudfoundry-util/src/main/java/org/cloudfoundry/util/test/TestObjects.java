@@ -40,23 +40,23 @@ import java.util.stream.Collectors;
  * <p>
  * A <i>built object</i> of type <b>B</b> is an object with a {@code builder()} method returning a <i>builder object</i> which builds type <b>B</b>.
  * <p>
- * The exported static methods are {@link #fill T fill(T, String)} and {@link #fill T fill(T)}. The {@code T} argument must be an object of builder type (which is returned as result), 
+ * The exported static methods are {@link #fill T fill(T, String)} and {@link #fill T fill(T)}. The {@code T} argument must be an object of builder type (which is returned as result),
  * and the {@code String} is a <i>modifier</i> which is used to augment the {@code String} values set.  The modifier must not be {@code null}.
  * <p>
  * {@code fill(b)} is equivalent to {@code fill(b, "")}.
  * <p>
  * {@code TestObjects} populates builder objects with test values. Builder setter methods are called with standard values based upon the parameter type and the name of the setter method.
- * <ul> 
- *      <li>{@code enum} types are set to the first enumerated constant value.</li> 
- *      <li>{@link Boolean} types are set to {@code true}.</li> 
- *      <li>{@link Date} types are set to {@code new Date(0)}.</li> 
- *      <li>{@link Double} types are set to {@code 1.0}.</li> 
- *      <li>{@link Duration} types are set to a duration of 15 seconds.</li> 
- *      <li>{@link Integer} or {@link Long} types are set to {@code 1}.</li> 
- *      <li>{@link Iterable} types are set to empty.</li> 
- *      <li>{@link Map} types are set to empty.</li> 
- *      <li>{@link String} types are set to {@code "test-"+modifier+settername}.</li> 
- *      <li>Types of <i>built objects</i> are set to a value built from a (recursively) {@code fill()}ed builder instance.</li> 
+ * <ul>
+ * <li>{@code enum} types are set to the first enumerated constant value.</li>
+ * <li>{@link Boolean} types are set to {@code true}.</li>
+ * <li>{@link Date} types are set to {@code new Date(0)}.</li>
+ * <li>{@link Double} types are set to {@code 1.0}.</li>
+ * <li>{@link Duration} types are set to a duration of 15 seconds.</li>
+ * <li>{@link Integer} or {@link Long} types are set to {@code 1}.</li>
+ * <li>{@link Iterable} types are set to empty.</li>
+ * <li>{@link Map} types are set to empty.</li>
+ * <li>{@link String} types are set to {@code "test-"+modifier+settername}.</li>
+ * <li>Types of <i>built objects</i> are set to a value built from a (recursively) {@code fill()}ed builder instance.</li>
  * </ul>
  * <p>
  * Only public, chainable, single-parameter setter methods which have a corresponding getter (on the type built) are configured.
@@ -108,12 +108,12 @@ public abstract class TestObjects {
             });
     }
 
-    private static Method getBuilderMethod(Class<?> builderType) {
-        return ReflectionUtils.findMethod(builderType, "builder");
-    }
-
     private static Method getBuildMethod(Class<?> builderType) {
         return ReflectionUtils.findMethod(builderType, "build");
+    }
+
+    private static Method getBuilderMethod(Class<?> builderType) {
+        return ReflectionUtils.findMethod(builderType, "builder");
     }
 
     private static Set<String> getBuiltGetters(Class<?> builderType) {
@@ -133,6 +133,7 @@ public abstract class TestObjects {
             .filter(TestObjects::isPublic)
             .filter(returnsThisType(builderType))
             .filter(TestObjects::hasSingleParameter)
+            .filter(method -> !isParameterOptional(method))
             .filter(method -> hasMatchingGetter(method, builtGetters))
             .collect(Collectors.toList());
     }
@@ -156,25 +157,27 @@ public abstract class TestObjects {
 
     @SuppressWarnings("unchecked")
     private static Object getConfiguredValue(Method configurationMethod, Optional<String> modifier) {
-        Class<?> parameterType = getParameter(configurationMethod).getType();
+        return getConfiguredValue(configurationMethod, modifier, getParameter(configurationMethod).getType());
+    }
 
+    private static Object getConfiguredValue(Method configurationMethod, Optional<String> modifier, Class<?> parameterType) {
         if (isBuiltType(parameterType)) {
             return getConfiguredBuilder(parameterType, modifier);
-        } else if (Enum.class.isAssignableFrom(parameterType)) {
+        } else if (parameterType.isEnum()) {
             return getConfiguredEnum(parameterType);
-        } else if (parameterType == Boolean.class) {
+        } else if (parameterType == Boolean.class || parameterType == boolean.class) {
             return Boolean.TRUE;
         } else if (parameterType == Date.class) {
             return new Date(0);
-        } else if (parameterType == Double.class) {
+        } else if (parameterType == Double.class || parameterType == double.class) {
             return 1D;
         } else if (parameterType == Duration.class) {
             return Duration.ofSeconds(15);
-        } else if (parameterType == Integer.class) {
+        } else if (parameterType == Integer.class || parameterType == int.class) {
             return 1;
         } else if (parameterType == Iterable.class) {
             return Collections.emptyList();
-        } else if (parameterType == Long.class) {
+        } else if (parameterType == Long.class || parameterType == long.class) {
             return 1L;
         } else if (parameterType == Map.class) {
             return Collections.emptyMap();
@@ -219,6 +222,10 @@ public abstract class TestObjects {
             .map(Method::getReturnType)
             .map(aType::equals)
             .orElse(false);
+    }
+
+    private static boolean isParameterOptional(Method method) {
+        return Optional.class == getParameter(method).getType();
     }
 
     private static boolean isPublic(Method method) {

@@ -22,6 +22,7 @@ import org.cloudfoundry.uaa.tokens.GrantType;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Client in Create request
@@ -46,8 +47,7 @@ abstract class AbstractCreateClient {
      * Were the approvals deleted for the client, and an audit event sent
      */
     @JsonProperty("approvals_deleted")
-    @Nullable
-    abstract Boolean getApprovalsDeleted();
+    abstract Optional<Boolean> getApprovalsDeleted();
 
     /**
      * Scopes that the client is able to grant when creating a client
@@ -80,22 +80,19 @@ abstract class AbstractCreateClient {
      * A secret string used for authenticating as this client
      */
     @JsonProperty("client_secret")
-    @Nullable
-    abstract String getClientSecret();
+    abstract Optional<String> getClientSecret();
 
     /**
      * What scope the bearer token had when client was created
      */
     @JsonProperty("createdwith")
-    @Nullable
-    abstract String getCreatedWith();
+    abstract Optional<String> getCreatedWith();
 
     /**
      * A human readable name for the client
      */
     @JsonProperty("name")
-    @Nullable
-    abstract String getName();
+    abstract Optional<String> getName();
 
     /**
      * Allowed URI pattern for redirect during authorization
@@ -122,7 +119,6 @@ abstract class AbstractCreateClient {
      * A random string used to generate the client’s revokation key. Change this value to revoke all active tokens for the client
      */
     @JsonProperty("token_salt")
-    @Nullable
-    abstract String getTokenSalt();
+    abstract Optional<String> getTokenSalt();
 
 }

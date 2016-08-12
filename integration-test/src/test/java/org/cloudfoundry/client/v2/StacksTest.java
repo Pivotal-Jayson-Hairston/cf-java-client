@@ -45,7 +45,7 @@ public final class StacksTest extends AbstractIntegrationTest {
                 .get(GetStackRequest.builder()
                     .stackId(stackId)
                     .build()))
-            .map(resource -> resource.getEntity().getName())
+            .map(resource -> ResourceUtils.getEntity(resource).getName())
             .subscribe(this.testSubscriber()
                 .expectEquals(this.stackName));
     }
@@ -60,7 +60,7 @@ public final class StacksTest extends AbstractIntegrationTest {
                             .page(page)
                             .build()))
                     .filter(resource -> ResourceUtils.getId(resource).equals(stackId)))
-            .map(resource -> resource.getEntity().getName())
+            .map(resource -> ResourceUtils.getEntity(resource).getName())
             .subscribe(this.testSubscriber()
                 .expectEquals(this.stackName));
     }
@@ -72,7 +72,7 @@ public final class StacksTest extends AbstractIntegrationTest {
                 .name(this.stackName)
                 .page(page)
                 .build()))
-            .map(resource -> resource.getEntity().getName())
+            .map(resource -> ResourceUtils.getEntity(resource).getName())
             .subscribe(this.testSubscriber()
                 .expectEquals(this.stackName));
     }

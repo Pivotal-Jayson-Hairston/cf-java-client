@@ -49,6 +49,13 @@ import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKN
 @Value.Immutable
 abstract class _DefaultConnectionContext implements ConnectionContext {
 
+    private static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper()
+        .disable(FAIL_ON_UNKNOWN_PROPERTIES)
+        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+        .registerModule(new Jdk8Module()
+            .configureAbsentsAsNulls(true))
+        .setSerializationInclusion(NON_NULL);
+
     private static final int DEFAULT_PORT = 443;
 
     private static final Pattern HOSTNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9-.]+$");
@@ -58,6 +65,16 @@ abstract class _DefaultConnectionContext implements ConnectionContext {
     private static final int SEND_BUFFER_SIZE = 10 * 1024 * 1024;
 
     private static final int UNDEFINED_PORT = -1;
+
+    /**
+     * Returns an {@link ObjectMapper} with the default configuration required for proper behavior. This method calls the {@link ObjectMapper#copy()} method meaning that it can be reconfigured without
+     * affecting other usages.
+     *
+     * @return an {@link ObjectMapper} with the default configuration
+     */
+    public static ObjectMapper getDefaultObjectMapper() {
+        return DEFAULT_OBJECT_MAPPER.copy();
+    }
 
     @Override
     @Value.Default
@@ -79,14 +96,8 @@ abstract class _DefaultConnectionContext implements ConnectionContext {
     @Override
     @Value.Default
     public ObjectMapper getObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper()
-            .disable(FAIL_ON_UNKNOWN_PROPERTIES)
-            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-            .registerModule(new Jdk8Module())
-            .setSerializationInclusion(NON_NULL);
-
+        ObjectMapper objectMapper = getDefaultObjectMapper();
         getProblemHandlers().forEach(objectMapper::addHandler);
-
         return objectMapper;
     }
 

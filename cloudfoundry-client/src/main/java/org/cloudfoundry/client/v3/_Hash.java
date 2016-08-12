@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * A hash payload
@@ -32,14 +33,12 @@ abstract class _Hash {
      * The type
      */
     @JsonProperty("type")
-    @Nullable
-    abstract String getType();
+    abstract Optional<String> getType();
 
     /**
      * The value
      */
     @JsonProperty("value")
-    @Nullable
-    abstract String getValue();
+    abstract Optional<String> getValue();
 
 }

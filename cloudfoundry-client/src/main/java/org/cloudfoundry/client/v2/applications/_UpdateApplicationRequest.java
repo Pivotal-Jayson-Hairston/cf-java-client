@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The request payload for the v2 Update Application request
@@ -39,45 +40,39 @@ abstract class _UpdateApplicationRequest {
      * Buildpack to build the application
      */
     @JsonProperty("buildpack")
-    @Nullable
-    abstract String getBuildpack();
+    abstract Optional<String> getBuildpack();
 
     /**
      * The command to start the application after it is staged
      */
     @JsonProperty("command")
-    @Nullable
-    abstract String getCommand();
+    abstract Optional<String> getCommand();
 
     /**
      * Open the console port for the application (at {@code $CONSOLE_PORT})
      */
     @Deprecated
     @JsonProperty("console")
-    @Nullable
-    abstract Boolean getConsole();
+    abstract Optional<Boolean> getConsole();
 
     /**
      * Open the debug port for the application (at {@code $DEBUG_PORT})
      */
     @Deprecated
     @JsonProperty("debug")
-    @Nullable
-    abstract Boolean getDebug();
+    abstract Optional<Boolean> getDebug();
 
     /**
      * Use diego to stage and to run when available
      */
     @JsonProperty("diego")
-    @Nullable
-    abstract Boolean getDiego();
+    abstract Optional<Boolean> getDiego();
 
     /**
      * The maximum amount of disk available to an instance of an application. In megabytes.
      */
     @JsonProperty("disk_quota")
-    @Nullable
-    abstract Integer getDiskQuota();
+    abstract Optional<Integer> getDiskQuota();
 
     /**
      * Docker credentials for pulling docker image
@@ -90,15 +85,13 @@ abstract class _UpdateApplicationRequest {
      * Name of the Docker image containing the application
      */
     @JsonProperty("docker_image")
-    @Nullable
-    abstract String getDockerImage();
+    abstract Optional<String> getDockerImage();
 
     /**
      * Enable SSH for the application
      */
     @JsonProperty("enable_ssh")
-    @Nullable
-    abstract Boolean getEnableSsh();
+    abstract Optional<Boolean> getEnableSsh();
 
     /**
      * Key/value pairs of all the environment variables to run in your application. Does not include any system or service variables.
@@ -111,44 +104,38 @@ abstract class _UpdateApplicationRequest {
      * Timeout for health checking of an staged application when starting up
      */
     @JsonProperty("health_check_timeout")
-    @Nullable
-    abstract Integer getHealthCheckTimeout();
+    abstract Optional<Integer> getHealthCheckTimeout();
 
     /**
      * Type of health check to perform
      */
     @JsonProperty("health_check_type")
-    @Nullable
-    abstract String getHealthCheckType();
+    abstract Optional<String> getHealthCheckType();
 
     /**
      * The number of instances of the application to run. To ensure optimal availability, ensure there are at least 2 instances.
      */
     @JsonProperty("instances")
-    @Nullable
-    abstract Integer getInstances();
+    abstract Optional<Integer> getInstances();
 
     /**
      * The amount of memory each instance should have. In megabytes.
      */
     @JsonProperty("memory")
-    @Nullable
-    abstract Integer getMemory();
+    abstract Optional<Integer> getMemory();
 
     /**
      * The name of the application
      */
     @JsonProperty("name")
-    @Nullable
-    abstract String getName();
+    abstract Optional<String> getName();
 
     /**
      * Whether the application is production
      */
     @Deprecated
     @JsonProperty("production")
-    @Nullable
-    abstract String getProduction();
+    abstract Optional<String> getProduction();
 
     /**
      * The id of the associated space
@@ -161,14 +148,12 @@ abstract class _UpdateApplicationRequest {
      * The id of the associated stack
      */
     @JsonProperty("stack_guid")
-    @Nullable
-    abstract String getStackId();
+    abstract Optional<String> getStackId();
 
     /**
      * The current desired state of the application
      */
     @JsonProperty("state")
-    @Nullable
-    abstract String getState();
+    abstract Optional<String> getState();
 
 }

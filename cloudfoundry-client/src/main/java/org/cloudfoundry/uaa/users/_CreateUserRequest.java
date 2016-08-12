@@ -17,10 +17,10 @@
 package org.cloudfoundry.uaa.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The request payload for the create user operation
@@ -28,12 +28,22 @@ import java.util.List;
 @Value.Immutable
 abstract class _CreateUserRequest {
 
+    @Value.Check
+    void check() {
+        if (!getName().getFamilyName().isPresent() || getName().getFamilyName().get().isEmpty()) {
+            throw new IllegalStateException("Cannot build CreateUserRequest, required attribute familyName is not set, or is empty");
+        }
+
+        if (!getName().getGivenName().isPresent() || getName().getGivenName().get().isEmpty()) {
+            throw new IllegalStateException("Cannot build CreateUserRequest, required attribute givenName is not set, or is empty");
+        }
+    }
+
     /**
      * Whether the user is active
      */
     @JsonProperty("active")
-    @Nullable
-    abstract Boolean getActive();
+    abstract Optional<Boolean> getActive();
 
     /**
      * The emails for the user
@@ -45,8 +55,7 @@ abstract class _CreateUserRequest {
      * The external id
      */
     @JsonProperty("externalId")
-    @Nullable
-    abstract String getExternalId();
+    abstract Optional<String> getExternalId();
 
     /**
      * The user's name
@@ -58,8 +67,7 @@ abstract class _CreateUserRequest {
      * The identity provider that authenticated this user
      */
     @JsonProperty("origin")
-    @Nullable
-    abstract String getOrigin();
+    abstract Optional<String> getOrigin();
 
     /**
      * The password
@@ -77,18 +85,6 @@ abstract class _CreateUserRequest {
      * Whether the user's email is verified
      */
     @JsonProperty("verified")
-    @Nullable
-    abstract Boolean getVerified();
-
-    @Value.Check
-    void check() {
-        if (getName().getFamilyName() == null || getName().getFamilyName().isEmpty()) {
-            throw new IllegalStateException("Cannot build CreateUserRequest, required attribute familyName is not set, or is empty");
-        }
-
-        if (getName().getGivenName() == null || getName().getGivenName().isEmpty()) {
-            throw new IllegalStateException("Cannot build CreateUserRequest, required attribute givenName is not set, or is empty");
-        }
-    }
+    abstract Optional<Boolean> getVerified();
 
 }

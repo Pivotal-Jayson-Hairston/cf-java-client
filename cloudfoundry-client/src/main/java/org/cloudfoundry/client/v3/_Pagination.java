@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 @JsonDeserialize
 @Value.Immutable
@@ -29,42 +30,36 @@ abstract class _Pagination {
      * The first
      */
     @JsonProperty("first")
-    @Nullable
-    abstract Link getFirst();
+    abstract Optional<Link> getFirst();
 
     /**
      * The last
      */
     @JsonProperty("last")
-    @Nullable
-    abstract Link getLast();
+    abstract Optional<Link> getLast();
 
     /**
      * The next
      */
     @JsonProperty("next")
-    @Nullable
-    abstract Link getNext();
+    abstract Optional<Link> getNext();
 
     /**
      * The previous
      */
     @JsonProperty("previous")
-    @Nullable
-    abstract Link getPrevious();
+    abstract Optional<Link> getPrevious();
 
     /**
      * The total pages
      */
     @JsonProperty("total_pages")
-    @Nullable
-    abstract Integer getTotalPages();
+    abstract Optional<Integer> getTotalPages();
 
     /**
      * The total results
      */
     @JsonProperty("total_results")
-    @Nullable
-    abstract Integer getTotalResults();
+    abstract Optional<Integer> getTotalResults();
 
 }

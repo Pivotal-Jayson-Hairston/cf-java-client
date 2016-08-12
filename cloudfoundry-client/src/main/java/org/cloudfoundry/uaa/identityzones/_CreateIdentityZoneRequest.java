@@ -17,8 +17,9 @@
 package org.cloudfoundry.uaa.identityzones;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the create identity zone operation
@@ -30,22 +31,19 @@ abstract class _CreateIdentityZoneRequest {
      * The configuration
      */
     @JsonProperty("config")
-    @Nullable
-    abstract IdentityZoneConfiguration getConfiguration();
+    abstract Optional<IdentityZoneConfiguration> getConfiguration();
 
     /**
      * The description of the identity zone
      */
     @JsonProperty("description")
-    @Nullable
-    abstract String getDescription();
+    abstract Optional<String> getDescription();
 
     /**
      * The id of the identity zone. When not provided, an identifier will be generated
      */
     @JsonProperty("id")
-    @Nullable
-    abstract String getIdentityZoneId();
+    abstract Optional<String> getIdentityZoneId();
 
     /**
      * The name of the identity zone
@@ -63,7 +61,6 @@ abstract class _CreateIdentityZoneRequest {
      * The version of the identity zone
      */
     @JsonProperty("version")
-    @Nullable
-    abstract Integer getVersion();
+    abstract Optional<Integer> getVersion();
 
 }

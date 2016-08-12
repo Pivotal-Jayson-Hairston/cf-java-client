@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityzones;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the identity zone saml configuration
@@ -32,21 +33,18 @@ abstract class _Prompt {
      * Name of field.
      */
     @JsonProperty("name")
-    @Nullable
-    abstract String getFieldName();
+    abstract Optional<String> getFieldName();
 
     /**
      * What kind of field this is (e.g. text or password)
      */
     @JsonProperty("type")
-    @Nullable
-    abstract String getFieldType();
+    abstract Optional<String> getFieldType();
 
     /**
      * Actual text displayed on prompt for field.
      */
     @JsonProperty("text")
-    @Nullable
-    abstract String getText();
+    abstract Optional<String> getText();
 
 }

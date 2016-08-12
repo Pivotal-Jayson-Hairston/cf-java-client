@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v2.applications;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * Instance information in Get Application Instance response.
@@ -32,49 +33,42 @@ abstract class _ApplicationInstanceInfo {
      * The console IP
      */
     @JsonProperty("console_ip")
-    @Nullable
-    abstract String getConsoleIp();
+    abstract Optional<String> getConsoleIp();
 
     /**
      * The console port
      */
     @JsonProperty("console_port")
-    @Nullable
-    abstract Integer getConsolePort();
+    abstract Optional<Integer> getConsolePort();
 
     /**
      * The debug IP
      */
     @JsonProperty("debug_ip")
-    @Nullable
-    abstract String getDebugIp();
+    abstract Optional<String> getDebugIp();
 
     /**
      * The debug port
      */
     @JsonProperty("debug_port")
-    @Nullable
-    abstract Integer getDebugPort();
+    abstract Optional<Integer> getDebugPort();
 
     /**
      * The since
      */
     @JsonProperty("since")
-    @Nullable
-    abstract Double getSince();
+    abstract Optional<Double> getSince();
 
     /**
      * The state
      */
     @JsonProperty("state")
-    @Nullable
-    abstract String getState();
+    abstract Optional<String> getState();
 
     /**
      * The update
      */
     @JsonProperty("uptime")
-    @Nullable
-    abstract Long getUptime();
+    abstract Optional<Long> getUptime();
 
 }

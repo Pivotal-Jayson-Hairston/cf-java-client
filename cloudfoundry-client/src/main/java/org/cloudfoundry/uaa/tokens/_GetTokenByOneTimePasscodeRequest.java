@@ -16,10 +16,11 @@
 
 package org.cloudfoundry.uaa.tokens;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.cloudfoundry.uaa.BasicAuthorized;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the get token by one-time passcode operation
@@ -36,8 +37,7 @@ abstract class _GetTokenByOneTimePasscodeRequest implements BasicAuthorized {
     /**
      * The token format
      */
-    @Nullable
     @QueryParameter("token_format")
-    abstract TokenFormat getTokenFormat();
+    abstract Optional<TokenFormat> getTokenFormat();
 
 }

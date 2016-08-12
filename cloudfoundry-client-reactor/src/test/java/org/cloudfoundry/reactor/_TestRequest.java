@@ -22,6 +22,7 @@ import io.netty.handler.codec.http.HttpMethod;
 import okhttp3.Headers;
 import okhttp3.mockwebserver.RecordedRequest;
 import okio.Buffer;
+import org.cloudfoundry.util.test.FailingDeserializationProblemHandler;
 import org.immutables.value.Value;
 import org.junit.Assert;
 import org.springframework.core.io.ClassPathResource;
@@ -44,7 +45,8 @@ abstract class _TestRequest {
 
     public static final String EMPTY_HEADER = "EMPTY-HEADER";
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = DefaultConnectionContext.getDefaultObjectMapper()
+        .addHandler(new FailingDeserializationProblemHandler());
 
     private static final Pattern PATH_PATTERN = Pattern.compile("[A-Z]+ (.*) [A-Z0-9\\./]+");
 

@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The payload for the identity zone configuration
@@ -34,15 +35,13 @@ abstract class _IdentityZoneConfiguration {
      * IDP Discovery should be set to true if you have configured more than one identity provider for UAA. The discovery relies on email domain being set for each additional provider.
      */
     @JsonProperty("idpDiscoveryEnabled")
-    @Nullable
-    abstract Boolean getLdapDiscoveryEnabled();
+    abstract Optional<Boolean> getLdapDiscoveryEnabled();
 
     /**
      * Array The links
      */
     @JsonProperty("links")
-    @Nullable
-    abstract Links getLinks();
+    abstract Optional<Links> getLinks();
 
     /**
      * The prompts
@@ -55,14 +54,12 @@ abstract class _IdentityZoneConfiguration {
      * The saml configuration
      */
     @JsonProperty("samlConfig")
-    @Nullable
-    abstract SamlConfiguration getSamlConfiguration();
+    abstract Optional<SamlConfiguration> getSamlConfiguration();
 
     /**
      * The token policy
      */
     @JsonProperty("tokenPolicy")
-    @Nullable
-    abstract TokenPolicy getTokenPolicy();
+    abstract Optional<TokenPolicy> getTokenPolicy();
 
 }

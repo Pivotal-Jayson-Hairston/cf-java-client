@@ -20,6 +20,7 @@ import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The request payload for OpenID requests
@@ -35,9 +36,8 @@ abstract class AbstractAuthorizationRequest {
     /**
      * Redirection URI to which the authorization server will send the user-agent back once access is granted (or denied), optional if pre-registered by the client
      */
-    @Nullable
     @QueryParameter("redirect_uri")
-    abstract String getRedirectUri();
+    abstract Optional<String> getRedirectUri();
 
     /**
      * requested scopes, space-delimited

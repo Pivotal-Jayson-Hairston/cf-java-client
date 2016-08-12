@@ -16,7 +16,6 @@
 
 package org.cloudfoundry.doppler;
 
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.Map;
@@ -56,20 +55,17 @@ abstract class _Envelope {
     /**
      * The enclosed {@link ContainerMetric}
      */
-    @Nullable
-    abstract ContainerMetric getContainerMetric();
+    abstract Optional<ContainerMetric> getContainerMetric();
 
     /**
      * Deployment name (used to uniquely identify source)
      */
-    @Nullable
-    abstract String getDeployment();
+    abstract Optional<String> getDeployment();
 
     /**
      * The enclosed {@link Error}
      */
-    @Nullable
-    abstract Error getError();
+    abstract Optional<Error> getError();
 
     /**
      * Type of wrapped event. Only the optional field corresponding to the value of eventType should be set.
@@ -79,44 +75,37 @@ abstract class _Envelope {
     /**
      * The enclosed {@link HttpStart}
      */
-    @Nullable
-    abstract HttpStart getHttpStart();
+    abstract Optional<HttpStart> getHttpStart();
 
     /**
      * The enclosed {@link HttpStartStop}
      */
-    @Nullable
-    abstract HttpStartStop getHttpStartStop();
+    abstract Optional<HttpStartStop> getHttpStartStop();
 
     /**
      * The enclosed {@link HttpStop}
      */
-    @Nullable
-    abstract HttpStop getHttpStop();
+    abstract Optional<HttpStop> getHttpStop();
 
     /**
      * Index of job (used to uniquely identify source)
      */
-    @Nullable
-    abstract String getIndex();
+    abstract Optional<String> getIndex();
 
     /**
      * IP address (used to uniquely identify source)
      */
-    @Nullable
-    abstract String getIp();
+    abstract Optional<String> getIp();
 
     /**
      * Job name (used to uniquely identify source)
      */
-    @Nullable
-    abstract String getJob();
+    abstract Optional<String> getJob();
 
     /**
      * The enclosed {@link LogMessage}
      */
-    @Nullable
-    abstract LogMessage getLogMessage();
+    abstract Optional<LogMessage> getLogMessage();
 
     /**
      * Unique description of the origin of this event
@@ -131,13 +120,11 @@ abstract class _Envelope {
     /**
      * UNIX timestamp (in nanoseconds) event was wrapped in this Envelope.
      */
-    @Nullable
-    abstract Long getTimestamp();
+    abstract Optional<Long> getTimestamp();
 
     /**
      * The enclosed {@link ValueMetric}
      */
-    @Nullable
-    abstract ValueMetric getValueMetric();
+    abstract Optional<ValueMetric> getValueMetric();
 
 }

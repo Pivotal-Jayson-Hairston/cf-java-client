@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The name for a user
@@ -32,14 +33,12 @@ abstract class _Name {
      * The family name
      */
     @JsonProperty("familyName")
-    @Nullable // required to allow for legacy admin user
-    abstract String getFamilyName();
+    abstract Optional<String> getFamilyName();
 
     /**
      * The given name
      */
     @JsonProperty("givenName")
-    @Nullable // required to allow for legacy admin user
-    abstract String getGivenName();
+    abstract Optional<String> getGivenName();
 
 }

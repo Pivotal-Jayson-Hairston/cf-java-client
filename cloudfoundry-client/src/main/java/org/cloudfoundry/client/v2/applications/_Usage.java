@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v2.applications;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * Application instance usage info
@@ -32,28 +33,24 @@ abstract class _Usage {
      * The CPU usage
      */
     @JsonProperty("cpu")
-    @Nullable
-    abstract Double getCpu();
+    abstract Optional<Double> getCpu();
 
     /**
      * The disk usage
      */
     @JsonProperty("disk")
-    @Nullable
-    abstract Long getDisk();
+    abstract Optional<Long> getDisk();
 
     /**
      * The memory usage
      */
     @JsonProperty("mem")
-    @Nullable
-    abstract Long getMemory();
+    abstract Optional<Long> getMemory();
 
     /**
      * The time since start
      */
     @JsonProperty("time")
-    @Nullable
-    abstract String getTime();
+    abstract Optional<String> getTime();
 
 }

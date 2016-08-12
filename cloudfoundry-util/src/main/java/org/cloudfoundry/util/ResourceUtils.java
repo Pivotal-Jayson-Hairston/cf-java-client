@@ -37,7 +37,8 @@ public final class ResourceUtils {
      * @return the resource's entity
      */
     public static <T, R extends Resource<T>> T getEntity(R resource) {
-        return resource.getEntity();
+        return resource.getEntity()
+            .orElseThrow(() -> new IllegalStateException("Resource does not contain an entity"));
     }
 
     /**
@@ -47,7 +48,10 @@ public final class ResourceUtils {
      * @return the id of the resource
      */
     public static String getId(Resource<?> resource) {
-        return resource.getMetadata().getId();
+        return resource.getMetadata()
+            .orElseThrow(() -> new IllegalStateException("Resource does not contain metadata"))
+            .getId()
+            .orElseThrow(() -> new IllegalStateException("Resource does not contain an id"));
     }
 
     /**

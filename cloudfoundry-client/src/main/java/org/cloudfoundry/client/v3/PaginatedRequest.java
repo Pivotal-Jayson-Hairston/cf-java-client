@@ -16,38 +16,41 @@
 
 package org.cloudfoundry.client.v3;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * Base class for requests that are paginated
  */
 public abstract class PaginatedRequest {
 
-    @Value.Check
-    void check() {
-        if (getPage() != null && getPage() < 1) {
-            throw new IllegalStateException("page must be greater than or equal to 1");
-        }
-
-        if (getPerPage() != null && (getPerPage() < 1 || getPerPage() > 5_000)) {
-            throw new IllegalStateException("perPage much be between 1 and 5000 inclusive");
-        }
-    }
-
     /**
      * The page
      */
-    @Nullable
     @QueryParameter("page")
-    public abstract Integer getPage();
+    public abstract Optional<Integer> getPage();
 
     /**
      * The results per page
      */
-    @Nullable
     @QueryParameter("per_page")
-    public abstract Integer getPerPage();
+    public abstract Optional<Integer> getPerPage();
+
+    @Value.Check
+    void check() {
+        getPage()
+            .filter(page -> page < 1)
+            .ifPresent(page -> {
+                throw new IllegalStateException("page must be greater than or equal to 1");
+            });
+
+        getPerPage()
+            .filter(perPage -> perPage < 1 || perPage > 5_000)
+            .ifPresent(perPage -> {
+                throw new IllegalStateException("perPage much be between 1 and 5000 inclusive");
+            });
+    }
 
 }

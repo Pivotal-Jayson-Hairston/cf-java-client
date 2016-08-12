@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityproviders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The payload for the saml identity provider configuration
@@ -32,43 +33,37 @@ abstract class _SamlConfiguration extends AbstractExternalIdentityProviderConfig
      * Determines whether or not shadow users must be created before login by an administrator.
      */
     @JsonProperty("addShadowUserOnLogin")
-    @Nullable
-    abstract Boolean getAddShadowUserOnLogin();
+    abstract Optional<Boolean> getAddShadowUserOnLogin();
 
     /**
      * SAML assertion consumer index, default is 0
      */
     @JsonProperty("assertionConsumerIndex")
-    @Nullable
-    abstract Integer getAssertionConsumerIndex();
+    abstract Optional<Integer> getAssertionConsumerIndex();
 
     /**
      * Either EXPLICITLY_MAPPED in order to map external groups to OAuth scopes using the group mappings, or AS_SCOPES to use SAML group names as scopes.
      */
     @JsonProperty("groupMappingMode")
-    @Nullable
-    abstract ExternalGroupMappingMode getGroupMappingMode();
+    abstract Optional<ExternalGroupMappingMode> getGroupMappingMode();
 
     /**
      * Reserved for future use
      */
     @JsonProperty("iconUrl")
-    @Nullable
-    abstract String getIconUrl();
+    abstract Optional<String> getIconUrl();
 
     /**
      * This will be set to origin by system
      */
     @JsonProperty("idpEntityAlias")
-    @Nullable
-    abstract String getIdpEntityAlias();
+    abstract Optional<String> getIdpEntityAlias();
 
     /**
      * The link text for the SAML IDP on the login page
      */
     @JsonProperty("linkText")
-    @Nullable
-    abstract String getLinkText();
+    abstract Optional<String> getLinkText();
 
     /**
      * SAML Metadata - either an XML string or a URL that will deliver XML content
@@ -80,36 +75,31 @@ abstract class _SamlConfiguration extends AbstractExternalIdentityProviderConfig
      * Should metadata be validated, defaults to false
      */
     @JsonProperty("metadataTrustCheck")
-    @Nullable
-    abstract Boolean getMetadataTrustCheck();
+    abstract Optional<Boolean> getMetadataTrustCheck();
 
     /**
      * The name ID to use for the username, default is “urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified”.
      */
     @JsonProperty("nameID")
-    @Nullable
-    abstract String getNameId();
+    abstract Optional<String> getNameId();
 
     /**
      * Should the SAML login link be displayed on the login page, defaults to false
      */
     @JsonProperty("showSamlLink")
-    @Nullable
-    abstract Boolean getShowSamlLink();
+    abstract Optional<Boolean> getShowSamlLink();
 
     /**
      * Either "org.apache.commons.httpclient.protocol.DefaultProtocolSocketFactory" or"org.apache.commons.httpclient.contrib.ssl.EasySSLProtocolSocketFactory" depending on if the metaDataLocation of
      * type URL is HTTP or HTTPS, respectively
      */
     @JsonProperty("socketFactoryClassName")
-    @Nullable
-    abstract String getSocketFactoryClassName();
+    abstract Optional<String> getSocketFactoryClassName();
 
     /**
      * This will be set to the ID of the zone where the provider is being created by system
      */
     @JsonProperty("zoneId")
-    @Nullable
-    abstract String getZoneId();
+    abstract Optional<String> getZoneId();
 
 }

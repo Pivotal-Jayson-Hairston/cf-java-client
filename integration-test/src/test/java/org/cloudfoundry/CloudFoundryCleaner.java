@@ -387,12 +387,12 @@ final class CloudFoundryCleaner {
             .get(GetSharedDomainRequest.builder()
                 .sharedDomainId(domainId)
                 .build())
-            .map(response -> response.getEntity().getName())
+            .map(response -> ResourceUtils.getEntity(response).getName())
             .otherwise(e -> cloudFoundryClient.privateDomains()
                 .get(GetPrivateDomainRequest.builder()
                     .privateDomainId(domainId)
                     .build())
-                .map(response -> response.getEntity().getName()));
+                .map(response -> ResourceUtils.getEntity(response).getName()));
     }
 
     private static Flux<Void> removeServiceBindings(CloudFoundryClient cloudFoundryClient, String applicationId) {

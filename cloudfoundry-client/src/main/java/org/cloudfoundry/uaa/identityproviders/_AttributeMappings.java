@@ -24,6 +24,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The payload for the identity provider configuration attribute mappings
@@ -36,8 +37,7 @@ abstract class _AttributeMappings {
      * Map email to the attribute for email in the provider assertion.
      */
     @JsonProperty("email")
-    @Nullable
-    abstract String getEmail();
+    abstract Optional<String> getEmail();
 
     /**
      * Map external_groups to the attribute for groups in the provider assertion (can be a list or a string).
@@ -51,28 +51,24 @@ abstract class _AttributeMappings {
      * Map family_name to the attribute for family name in the provider assertion.
      */
     @JsonProperty("family_name")
-    @Nullable
-    abstract String getFamilyName();
+    abstract Optional<String> getFamilyName();
 
     /**
      * Map first_name to the attribute for fist name in the provider assertion.
      */
     @JsonProperty("first_name")
-    @Nullable
-    abstract String getFirstName();
+    abstract Optional<String> getFirstName();
 
     /**
      * Map given_name to the attribute for given name in the provider assertion.
      */
     @JsonProperty("given_name")
-    @Nullable
-    abstract String getGivenName();
+    abstract Optional<String> getGivenName();
 
     /**
      * Map phone_number to the attribute for phone number in the provider assertion.
      */
     @JsonProperty("phone_number")
-    @Nullable
-    abstract String getPhoneNumber();
+    abstract Optional<String> getPhoneNumber();
 
 }

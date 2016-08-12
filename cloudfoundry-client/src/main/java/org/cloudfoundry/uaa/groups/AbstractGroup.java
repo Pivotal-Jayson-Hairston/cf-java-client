@@ -17,10 +17,10 @@
 package org.cloudfoundry.uaa.groups;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.uaa.Metadata;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The entity response payload for Group
@@ -31,8 +31,7 @@ abstract class AbstractGroup {
      * Human readable description of the group, displayed e.g. when approving scopes
      */
     @JsonProperty("description")
-    @Nullable
-    abstract String getDescription();
+    abstract Optional<String> getDescription();
 
     /**
      * The identifier specified upon creation of the group, unique within the identity zone

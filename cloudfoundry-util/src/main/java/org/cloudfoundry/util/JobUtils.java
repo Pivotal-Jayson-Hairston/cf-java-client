@@ -52,7 +52,7 @@ public final class JobUtils {
             job = Mono.just(ResourceUtils.getEntity(resource));
         } else {
             job = requestJob(cloudFoundryClient, ResourceUtils.getId(resource))
-                .map(GetJobResponse::getEntity)
+                .map(ResourceUtils::getEntity)
                 .filter(JobUtils::isComplete)
                 .repeatWhenEmpty(exponentialBackOff(Duration.ofSeconds(1), Duration.ofSeconds(15), Duration.ofMinutes(5)));
         }

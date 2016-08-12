@@ -18,6 +18,7 @@ package org.cloudfoundry.reactor.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cloudfoundry.client.v2.CloudFoundryException;
+import org.cloudfoundry.reactor.DefaultConnectionContext;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.HttpException;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public final class CloudFoundryExceptionBuilder {
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = DefaultConnectionContext.getDefaultObjectMapper();
 
     private CloudFoundryExceptionBuilder() {
     }

@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v2.applications;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the resources
@@ -32,28 +33,24 @@ abstract class _Resource {
      * The hash
      */
     @JsonProperty("sha1")
-    @Nullable
-    abstract String getHash();
+    abstract Optional<String> getHash();
 
     /**
      * The POSIX file mode in an octal representation
      */
     @JsonProperty("mode")
-    @Nullable
-    abstract String getMode();
+    abstract Optional<String> getMode();
 
     /**
      * The path
      */
     @JsonProperty("fn")
-    @Nullable
-    abstract String getPath();
+    abstract Optional<String> getPath();
 
     /**
      * The size
      */
     @JsonProperty("size")
-    @Nullable
-    abstract Integer getSize();
+    abstract Optional<Integer> getSize();
 
 }

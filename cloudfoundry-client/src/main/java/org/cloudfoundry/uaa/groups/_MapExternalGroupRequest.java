@@ -17,9 +17,10 @@
 package org.cloudfoundry.uaa.groups;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.uaa.IdentityZoned;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the map external group request
@@ -43,7 +44,6 @@ abstract class _MapExternalGroupRequest implements IdentityZoned {
      * Unique alias of the identity provider
      */
     @JsonProperty("origin")
-    @Nullable
-    abstract String getOrigin();
+    abstract Optional<String> getOrigin();
 
 }

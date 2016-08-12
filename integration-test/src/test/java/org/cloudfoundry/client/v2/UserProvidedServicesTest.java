@@ -29,7 +29,6 @@ import org.cloudfoundry.client.v2.userprovidedserviceinstances.GetUserProvidedSe
 import org.cloudfoundry.client.v2.userprovidedserviceinstances.ListUserProvidedServiceInstanceServiceBindingsRequest;
 import org.cloudfoundry.client.v2.userprovidedserviceinstances.ListUserProvidedServiceInstancesRequest;
 import org.cloudfoundry.client.v2.userprovidedserviceinstances.UpdateUserProvidedServiceInstanceRequest;
-import org.cloudfoundry.client.v2.userprovidedserviceinstances.UpdateUserProvidedServiceInstanceResponse;
 import org.cloudfoundry.client.v2.userprovidedserviceinstances.UserProvidedServiceInstanceEntity;
 import org.cloudfoundry.client.v2.userprovidedserviceinstances.UserProvidedServiceInstanceResource;
 import org.cloudfoundry.util.PaginationUtils;
@@ -167,7 +166,7 @@ public final class UserProvidedServicesTest extends AbstractIntegrationTest {
                             .name(newInstanceName)
                             .credential("test-cred", "some value")
                             .build())
-                        .map(UpdateUserProvidedServiceInstanceResponse::getEntity)
+                        .map(ResourceUtils::getEntity)
                 ))
             .then(function((instanceId, entity1) -> Mono
                 .when(
@@ -177,7 +176,7 @@ public final class UserProvidedServicesTest extends AbstractIntegrationTest {
                             .userProvidedServiceInstanceId(instanceId)
                             .credentials(Collections.emptyMap())
                             .build())
-                        .map(UpdateUserProvidedServiceInstanceResponse::getEntity)
+                        .map(ResourceUtils::getEntity)
                 )))
             .subscribe(this.<Tuple2<UserProvidedServiceInstanceEntity, UserProvidedServiceInstanceEntity>>testSubscriber()
                 .expectThat(consumer((entity1, entity2) -> {
@@ -224,8 +223,8 @@ public final class UserProvidedServicesTest extends AbstractIntegrationTest {
 
     private static Consumer<Tuple3<String, String, ServiceBindingResource>> serviceBindingMatchesRequest() {
         return consumer((applicationId, instanceId, resource) -> {
-            assertEquals(applicationId, resource.getEntity().getApplicationId());
-            assertEquals(instanceId, resource.getEntity().getServiceInstanceId());
+            assertEquals(applicationId, ResourceUtils.getEntity(resource).getApplicationId());
+            assertEquals(instanceId, ResourceUtils.getEntity(resource).getServiceInstanceId());
         });
     }
 

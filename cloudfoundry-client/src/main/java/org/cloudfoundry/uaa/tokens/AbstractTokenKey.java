@@ -17,7 +17,8 @@
 package org.cloudfoundry.uaa.tokens;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
+
+import java.util.Optional;
 
 /**
  * The base class for token keys
@@ -40,8 +41,7 @@ public abstract class AbstractTokenKey {
      * The id
      */
     @JsonProperty("kid")
-    @Nullable
-    public abstract String getId();
+    public abstract Optional<String> getId();
 
     /**
      * The key type

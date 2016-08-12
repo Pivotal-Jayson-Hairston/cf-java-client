@@ -16,10 +16,11 @@
 
 package org.cloudfoundry.uaa.users;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.cloudfoundry.uaa.PaginatedAndSortedRequest;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the lookup user ids and usernames operation
@@ -30,8 +31,7 @@ abstract class _LookupUserIdsRequest extends PaginatedAndSortedRequest {
     /**
      * Whether to include users from inactive identity providers
      */
-    @Nullable
     @QueryParameter("includeInactive")
-    abstract Boolean getIncludeInactive();
+    abstract Optional<Boolean> getIncludeInactive();
 
 }

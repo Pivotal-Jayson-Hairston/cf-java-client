@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 @JsonDeserialize
 @Value.Immutable
@@ -29,14 +30,12 @@ abstract class _BuildpackData implements Data {
      * The buildpack
      */
     @JsonProperty("buildpack")
-    @Nullable
-    abstract String getBuildpack();
+    abstract Optional<String> getBuildpack();
 
     /**
      * The stack
      */
     @JsonProperty("stack")
-    @Nullable
-    abstract String getStack();
+    abstract Optional<String> getStack();
 
 }

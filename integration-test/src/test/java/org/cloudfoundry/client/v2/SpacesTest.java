@@ -347,7 +347,7 @@ public final class SpacesTest extends AbstractIntegrationTest {
             .as(thenKeep(spaceId -> createApplicationId(this.cloudFoundryClient, spaceId, applicationName)))
             .then(spaceId -> requestListSpaceApplications(this.cloudFoundryClient, spaceId)
                 .single())
-            .map(ApplicationResource::getEntity)
+            .map(ResourceUtils::getEntity)
             .map(ApplicationEntity::getName)
             .subscribe(this.<String>testSubscriber()
                 .expectEquals(applicationName));
@@ -363,7 +363,7 @@ public final class SpacesTest extends AbstractIntegrationTest {
             .as(thenKeep(spaceId -> createApplicationId(this.cloudFoundryClient, spaceId, applicationName)))
             .then(spaceId -> requestListSpaceApplications(this.cloudFoundryClient, spaceId, builder -> builder.diego(true))
                 .single())
-            .map(ApplicationResource::getEntity)
+            .map(ResourceUtils::getEntity)
             .map(ApplicationEntity::getName)
             .subscribe(this.<String>testSubscriber()
                 .expectEquals(applicationName));

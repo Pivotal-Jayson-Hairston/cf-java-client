@@ -16,8 +16,9 @@
 
 package org.cloudfoundry.uaa;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
+
+import java.util.Optional;
 
 /**
  * Base class for requests that are paginated
@@ -27,29 +28,25 @@ public abstract class PaginatedAndSortedRequest {
     /**
      * The number of results per page
      */
-    @Nullable
     @QueryParameter("count")
-    public abstract Integer getCount();
+    public abstract Optional<Integer> getCount();
 
     /**
      * The filter
      */
-    @Nullable
     @QueryParameter("filter")
-    public abstract String getFilter();
+    public abstract Optional<String> getFilter();
 
     /**
      * The sort order
      */
-    @Nullable
     @QueryParameter("sortOrder")
-    public abstract SortOrder getSortOrder();
+    public abstract Optional<SortOrder> getSortOrder();
 
     /**
      * The start index
      */
-    @Nullable
     @QueryParameter("startIndex")
-    public abstract Integer getStartIndex();
+    public abstract Optional<Integer> getStartIndex();
 
 }

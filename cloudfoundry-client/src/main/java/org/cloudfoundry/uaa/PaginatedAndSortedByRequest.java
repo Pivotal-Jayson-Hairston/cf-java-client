@@ -16,8 +16,9 @@
 
 package org.cloudfoundry.uaa;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
+
+import java.util.Optional;
 
 /**
  * Base class for requests that are paginated
@@ -27,8 +28,7 @@ public abstract class PaginatedAndSortedByRequest extends PaginatedAndSortedRequ
     /**
      * The sort by
      */
-    @Nullable
     @QueryParameter("sortBy")
-    public abstract String getSortBy();
+    public abstract Optional<String> getSortBy();
 
 }

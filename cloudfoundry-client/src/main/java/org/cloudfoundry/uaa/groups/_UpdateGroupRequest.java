@@ -18,12 +18,12 @@ package org.cloudfoundry.uaa.groups;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.uaa.IdentityZoned;
 import org.cloudfoundry.uaa.Versioned;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The request payload for the update group
@@ -36,14 +36,19 @@ abstract class _UpdateGroupRequest implements Versioned, IdentityZoned {
      */
     @JsonIgnore
     @Override
-    public abstract String getVersion();
+    public abstract Optional<String> getVersion();
+
+    @Value.Check
+    void check() {
+        getVersion()
+            .orElseThrow(() -> new IllegalStateException("Cannot build UpdateUserRequest, some of required attributes are not set [version]"));
+    }
 
     /**
      * Human readable description of the group, displayed e.g. when approving scopes
      */
     @JsonProperty("description")
-    @Nullable
-    abstract String getDescription();
+    abstract Optional<String> getDescription();
 
     /**
      * The identifier specified upon creation of the group, unique within the identity zone

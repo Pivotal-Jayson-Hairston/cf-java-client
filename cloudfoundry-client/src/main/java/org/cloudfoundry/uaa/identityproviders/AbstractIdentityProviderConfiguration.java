@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 @JsonIgnoreProperties(value = "additionalConfiguration")
 abstract class AbstractIdentityProviderConfiguration implements IdentityProviderConfiguration {
@@ -36,7 +37,6 @@ abstract class AbstractIdentityProviderConfiguration implements IdentityProvider
      * Human readable name/description of this provider
      */
     @JsonProperty("providerDescription")
-    @Nullable
-    abstract String getProviderDescription();
+    abstract Optional<String> getProviderDescription();
 
 }

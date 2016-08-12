@@ -22,10 +22,10 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A builder for Cloud Foundry queries
@@ -42,38 +42,44 @@ public final class QueryBuilder {
      * @param instance the instance to inspect and invoke
      */
     public static void augment(UriComponentsBuilder builder, Object instance) {
-        Method[] methods = ReflectionUtils.getAllDeclaredMethods(instance.getClass());
-        Arrays.sort(methods, MethodNameComparator.INSTANCE);
+        getMethods(instance)
+            .sorted(MethodNameComparator.INSTANCE)
+            .forEach((method) -> processMethod(builder, method, instance));
+    }
 
-        for (Method method : methods) {
-            QueryParameter queryParameter = AnnotationUtils.getAnnotation(method, QueryParameter.class);
-            if (!hasQueryParameter(queryParameter)) {
-                continue;
-            }
+    private static Stream<Method> getMethods(Object instance) {
+        return Stream.of(ReflectionUtils.getAllDeclaredMethods(instance.getClass()));
+    }
 
-            getValue(method, instance)
-                .ifPresent(value -> {
-                    if (value instanceof Collection) {
-                        builder.queryParam(queryParameter.value(), ((Collection<?>) value).stream()
-                            .map(Object::toString)
-                            .collect(Collectors.joining(queryParameter.delimiter())));
-                    } else {
-                        builder.queryParam(queryParameter.value(), value);
-                    }
-                });
-            }
-        }
+    private static Optional<QueryParameter> getQueryParameter(Method method) {
+        return Optional.ofNullable(AnnotationUtils.getAnnotation(method, QueryParameter.class));
     }
 
     @SuppressWarnings("unchecked")
     private static Optional<Object> getValue(Method method, Object instance) {
         ReflectionUtils.makeAccessible(method);
         Object value = ReflectionUtils.invokeMethod(method, instance);
-        return value instanceof Optional ? (Optional<Object>) value : Optional.ofNullable(value);
+        return value instanceof Optional ? (Optional<Object>) value : Optional.ofNullable(value);  // TODO: Remove ternary once @Nullable has been removed
     }
 
-    private static boolean hasQueryParameter(QueryParameter queryParameter) {
-        return queryParameter == null;
+    private static void processMethod(UriComponentsBuilder builder, Method method, Object instance) {
+        getQueryParameter(method)
+            .ifPresent(queryParameter -> processQueryParameter(builder, queryParameter, method, instance));
+    }
+
+    private static void processQueryParameter(UriComponentsBuilder builder, QueryParameter queryParameter, Method method, Object instance) {
+        getValue(method, instance)
+            .ifPresent(value -> processValue(builder, queryParameter, value));
+    }
+
+    private static void processValue(UriComponentsBuilder builder, QueryParameter queryParameter, Object value) {
+        if (value instanceof Collection) {
+            builder.queryParam(queryParameter.value(), ((Collection<?>) value).stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(queryParameter.delimiter())));
+        } else {
+            builder.queryParam(queryParameter.value(), value);
+        }
     }
 
 }

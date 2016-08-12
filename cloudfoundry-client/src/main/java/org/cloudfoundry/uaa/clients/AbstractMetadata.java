@@ -17,7 +17,8 @@
 package org.cloudfoundry.uaa.clients;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.cloudfoundry.Nullable;
+
+import java.util.Optional;
 
 /**
  * The payload for Client Metadata responses
@@ -46,8 +47,7 @@ abstract class AbstractMetadata {
      * Client name
      */
     @JsonProperty("clientName")
-    @Nullable
-    abstract String getClientName();
+    abstract Optional<String> getClientName();
 
     /**
      * Flag to control visibility on home page

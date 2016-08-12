@@ -17,10 +17,11 @@
 package org.cloudfoundry.uaa.groups;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.cloudfoundry.uaa.IdentityZoned;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the list members operation
@@ -38,8 +39,7 @@ abstract class _ListMembersRequest implements IdentityZoned {
      * Set to true to return the SCIM entities that have membership in the group
      */
     @JsonIgnore
-    @Nullable
     @QueryParameter("returnEntities")
-    abstract Boolean getReturnEntities();
+    abstract Optional<Boolean> getReturnEntities();
 
 }

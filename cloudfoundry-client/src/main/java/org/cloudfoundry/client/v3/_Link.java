@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * A link payload. By default it uses {@code GET} for the {@code method}
@@ -32,14 +33,12 @@ abstract class _Link {
      * The href
      */
     @JsonProperty("href")
-    @Nullable
-    abstract String getHref();
+    abstract Optional<String> getHref();
 
     /**
      * The method
      */
     @JsonProperty("method")
-    @Nullable
-    abstract String getMethod();
+    abstract Optional<String> getMethod();
 
 }

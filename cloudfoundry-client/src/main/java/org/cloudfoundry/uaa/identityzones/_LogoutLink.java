@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The request payload for the identity zone logout link
@@ -34,22 +35,19 @@ abstract class _LogoutLink {
      * Whether or not to allow the redirect parameter on logout.
      */
     @JsonProperty("disableRedirectParameter")
-    @Nullable
-    abstract Boolean getDisableRedirectParameter();
+    abstract Optional<Boolean> getDisableRedirectParameter();
 
     /**
      * Changes the name of the redirect parameter.
      */
     @JsonProperty("redirectParameterName")
-    @Nullable
-    abstract String getRedirectParameterName();
+    abstract Optional<String> getRedirectParameterName();
 
     /**
      * Logout redirect url.
      */
     @JsonProperty("redirectUrl")
-    @Nullable
-    abstract String getRedirectUrl();
+    abstract Optional<String> getRedirectUrl();
 
     /**
      * List of allowed whitelist redirects.

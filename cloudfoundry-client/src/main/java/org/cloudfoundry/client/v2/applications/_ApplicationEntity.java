@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The entity response payload for the Application resource
@@ -34,36 +35,31 @@ abstract class _ApplicationEntity extends AbstractApplicationEntity {
      * The detected buildpack
      */
     @JsonProperty("detected_buildpack")
-    @Nullable
-    abstract String getDetectedBuildpack();
+    abstract Optional<String> getDetectedBuildpack();
 
     /**
      * Whether SSH is enabled
      */
     @JsonProperty("enable_ssh")
-    @Nullable
-    abstract Boolean getEnableSsh();
+    abstract Optional<Boolean> getEnableSsh();
 
     /**
      * The events url
      */
     @JsonProperty("events_url")
-    @Nullable
-    abstract String getEventsUrl();
+    abstract Optional<String> getEventsUrl();
 
     /**
      * The package state
      */
     @JsonProperty("package_state")
-    @Nullable
-    abstract String getPackageState();
+    abstract Optional<String> getPackageState();
 
     /**
      * When the package was update
      */
     @JsonProperty("package_updated_at")
-    @Nullable
-    abstract String getPackageUpdatedAt();
+    abstract Optional<String> getPackageUpdatedAt();
 
     /**
      * The ports
@@ -76,42 +72,36 @@ abstract class _ApplicationEntity extends AbstractApplicationEntity {
      * The route mappings url
      */
     @JsonProperty("route_mappings_url")
-    @Nullable
-    abstract String getRouteMappingsUrl();
+    abstract Optional<String> getRouteMappingsUrl();
 
     /**
      * The routes url
      */
     @JsonProperty("routes_url")
-    @Nullable
-    abstract String getRoutesUrl();
+    abstract Optional<String> getRoutesUrl();
 
     /**
      * The service bindings url
      */
     @JsonProperty("service_bindings_url")
-    @Nullable
-    abstract String getServiceBindingsUrl();
+    abstract Optional<String> getServiceBindingsUrl();
 
     /**
      * The space url
      */
     @JsonProperty("space_url")
-    @Nullable
-    abstract String getSpaceUrl();
+    abstract Optional<String> getSpaceUrl();
 
     /**
      * The stack url
      */
     @JsonProperty("stack_url")
-    @Nullable
-    abstract String getStackUrl();
+    abstract Optional<String> getStackUrl();
 
     /**
      * The version
      */
     @JsonProperty("version")
-    @Nullable
-    abstract String getVersion();
+    abstract Optional<String> getVersion();
 
 }

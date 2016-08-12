@@ -17,7 +17,8 @@
 package org.cloudfoundry.uaa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.cloudfoundry.Nullable;
+
+import java.util.Optional;
 
 /**
  * An interface that indicates that a UAA request can specify an If Match in its header
@@ -28,7 +29,6 @@ public interface Versioned {
      * Returns the version
      */
     @JsonIgnore
-    @Nullable
-    String getVersion();
+    Optional<String> getVersion();
 
 }

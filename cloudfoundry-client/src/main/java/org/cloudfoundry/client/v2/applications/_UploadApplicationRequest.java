@@ -17,12 +17,12 @@
 package org.cloudfoundry.client.v2.applications;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
 import org.immutables.value.Value;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Request payload for the Upload Application request.
@@ -45,9 +45,8 @@ abstract class _UploadApplicationRequest {
     /**
      * If true, a new asynchronous job is submitted to persist the bits and the job id is included in the response
      */
-    @Nullable
     @QueryParameter("async")
-    abstract Boolean getAsync();
+    abstract Optional<Boolean> getAsync();
 
     /**
      * Fingerprints of the application bits that have previously been pushed to Cloud Foundry

@@ -18,8 +18,9 @@ package org.cloudfoundry.client.v2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The metadata payload for a resource
@@ -32,28 +33,24 @@ abstract class _Metadata {
      * When the resource was created
      */
     @JsonProperty("created_at")
-    @Nullable
-    abstract String getCreatedAt();
+    abstract Optional<String> getCreatedAt();
 
     /**
      * The resource's id
      */
     @JsonProperty("guid")
-    @Nullable
-    abstract String getId();
+    abstract Optional<String> getId();
 
     /**
      * When the resource was last updated
      */
     @JsonProperty("updated_at")
-    @Nullable
-    abstract String getUpdatedAt();
+    abstract Optional<String> getUpdatedAt();
 
     /**
      * The resource's URL
      */
     @JsonProperty("url")
-    @Nullable
-    abstract String getUrl();
+    abstract Optional<String> getUrl();
 
 }

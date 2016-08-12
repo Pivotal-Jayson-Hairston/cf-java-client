@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityproviders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The payload for the OAuth2 identity provider configuration
@@ -32,7 +33,6 @@ abstract class _OAuth2Configuration extends AbstractAuthenticationConfiguration 
      * The OAuth check token endpoint URL. Reserved for future OAuth use.
      */
     @JsonProperty("checkTokenUrl")
-    @Nullable
-    abstract String getCheckTokenUrl();
+    abstract Optional<String> getCheckTokenUrl();
 
 }

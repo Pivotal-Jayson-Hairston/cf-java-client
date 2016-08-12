@@ -16,10 +16,10 @@
 
 package org.cloudfoundry.doppler;
 
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -32,7 +32,7 @@ abstract class _HttpStop {
         Objects.requireNonNull(dropsonde, "dropsonde");
 
         return HttpStop.builder()
-            .applicationId(UuidUtils.from(dropsonde.applicationId))
+            .applicationId(Optional.ofNullable(UuidUtils.from(dropsonde.applicationId)))
             .contentLength(dropsonde.contentLength)
             .peerType(PeerType.from(dropsonde.peerType))
             .requestId(UuidUtils.from(dropsonde.requestId))
@@ -45,8 +45,7 @@ abstract class _HttpStop {
     /**
      * The application id
      */
-    @Nullable
-    abstract UUID getApplicationId();
+    abstract Optional<UUID> getApplicationId();
 
     /**
      * The length of the response in bytes

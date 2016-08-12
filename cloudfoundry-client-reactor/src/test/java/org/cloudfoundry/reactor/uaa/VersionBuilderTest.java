@@ -20,6 +20,8 @@ import org.cloudfoundry.uaa.Versioned;
 import org.junit.Test;
 import reactor.ipc.netty.http.HttpClientRequest;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -31,7 +33,7 @@ public final class VersionBuilderTest {
 
     @Test
     public void augment() {
-        VersionBuilder.augment(this.outbound, new StubVersioned("test-version"));
+        VersionBuilder.augment(this.outbound, new StubVersioned(Optional.of("test-version")));
         verify(this.outbound).addHeader("If-Match", "test-version");
     }
 
@@ -43,20 +45,20 @@ public final class VersionBuilderTest {
 
     @Test
     public void augmentNullVersion() {
-        IdentityZoneBuilder.augment(this.outbound, new StubVersioned(null));
+        IdentityZoneBuilder.augment(this.outbound, new StubVersioned(Optional.empty()));
         verifyZeroInteractions(this.outbound);
     }
 
     private static final class StubVersioned implements Versioned {
 
-        private final String version;
+        private final Optional<String> version;
 
-        private StubVersioned(String version) {
+        private StubVersioned(Optional<String> version) {
             this.version = version;
         }
 
         @Override
-        public String getVersion() {
+        public Optional<String> getVersion() {
             return this.version;
         }
 

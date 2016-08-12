@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 @JsonDeserialize
 @Value.Immutable
@@ -31,50 +32,43 @@ abstract class _Statistics {
      * The application disk quota
      */
     @JsonProperty("disk_quota")
-    @Nullable
-    abstract Long getDiskQuota();
+    abstract Optional<Long> getDiskQuota();
 
     /**
      * The application file descriptor quota
      */
     @JsonProperty("fds_quota")
-    @Nullable
-    abstract Integer getFdsQuota();
+    abstract Optional<Integer> getFdsQuota();
 
     /**
      * The application host
      */
     @JsonProperty("host")
-    @Nullable
-    abstract String getHost();
+    abstract Optional<String> getHost();
 
     /**
      * The application memory quota
      */
     @JsonProperty("mem_quota")
-    @Nullable
-    abstract Long getMemoryQuota();
+    abstract Optional<Long> getMemoryQuota();
 
     /**
      * The application name
      */
     @JsonProperty("name")
-    @Nullable
-    abstract String getName();
+    abstract Optional<String> getName();
 
     /**
      * The application port
      */
     @JsonProperty("port")
-    @Nullable
-    abstract Integer getPort();
+    abstract Optional<Integer> getPort();
 
     /**
      * The application uptime
      */
     @JsonProperty("uptime")
-    @Nullable
-    abstract Long getUptime();
+    abstract Optional<Long> getUptime();
 
     /**
      * The application uris
@@ -87,7 +81,6 @@ abstract class _Statistics {
      * The application usage
      */
     @JsonProperty("usage")
-    @Nullable
-    abstract Usage getUsage();
+    abstract Optional<Usage> getUsage();
 
 }

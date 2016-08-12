@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityzones;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The request payload for the identity zone self service link
@@ -32,21 +33,18 @@ abstract class _SelfServiceLink {
      * Where users are directed upon clicking the password reset link.
      */
     @JsonProperty("passwd")
-    @Nullable
-    abstract String getResetPasswordLink();
+    abstract Optional<String> getResetPasswordLink();
 
     /**
      * Whether or not users are allowed to sign up or reset their passwords via the UI.
      */
     @JsonProperty("selfServiceLinksEnabled")
-    @Nullable
-    abstract Boolean getSelfServiceLinksEnabled();
+    abstract Optional<Boolean> getSelfServiceLinksEnabled();
 
     /**
      * Where users are directed upon clicking the account creation link.
      */
     @JsonProperty("signup")
-    @Nullable
-    abstract String getSignupLink();
+    abstract Optional<String> getSignupLink();
 
 }

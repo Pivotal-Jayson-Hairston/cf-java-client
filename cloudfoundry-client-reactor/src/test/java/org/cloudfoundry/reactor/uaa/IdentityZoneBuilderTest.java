@@ -20,6 +20,8 @@ import org.cloudfoundry.uaa.IdentityZoned;
 import org.junit.Test;
 import reactor.ipc.netty.http.HttpClientRequest;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -45,8 +47,8 @@ public final class IdentityZoneBuilderTest {
     private static final class StubIdentityZoned implements IdentityZoned {
 
         @Override
-        public String getIdentityZoneId() {
-            return "test-identity-zone-id";
+        public Optional<String> getIdentityZoneId() {
+            return Optional.of("test-identity-zone-id");
         }
 
     }

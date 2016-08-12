@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Base class for requests that are paginated
@@ -32,8 +33,7 @@ public abstract class PaginatedResponse<T> {
      * The pagination
      */
     @JsonProperty("pagination")
-    @Nullable
-    public abstract Pagination getPagination();
+    public abstract Optional<Pagination> getPagination();
 
     /**
      * The resources

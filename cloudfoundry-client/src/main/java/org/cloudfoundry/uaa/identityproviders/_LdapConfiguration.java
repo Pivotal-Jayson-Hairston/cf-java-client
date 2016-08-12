@@ -18,8 +18,9 @@ package org.cloudfoundry.uaa.identityproviders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
+
+import java.util.Optional;
 
 /**
  * The payload for the ldap identity provider configuration
@@ -32,8 +33,7 @@ abstract class _LdapConfiguration extends AbstractExternalIdentityProviderConfig
      * The auto add group flag
      */
     @JsonProperty("autoAddGroups")
-    @Nullable
-    abstract Boolean getAutoAddGroups();
+    abstract Optional<Boolean> getAutoAddGroups();
 
     /**
      * The URL to the ldap server, must start with ldap:// or ldaps://
@@ -45,57 +45,49 @@ abstract class _LdapConfiguration extends AbstractExternalIdentityProviderConfig
      * If you specified BindUserDN, then specify the corresponding password to be used for binding here.
      */
     @JsonProperty("bindPassword")
-    @Nullable
-    abstract String getBindPassword();
+    abstract Optional<String> getBindPassword();
 
     /**
      * The distinguished name the gatekeeper uses to bind to the LDAP server.
      */
     @JsonProperty("bindUserDn")
-    @Nullable
-    abstract String getBindUserDistinguishedName();
+    abstract Optional<String> getBindUserDistinguishedName();
 
     /**
      * The group role attribute
      */
     @JsonProperty("groupRoleAttribute")
-    @Nullable
-    abstract String getGroupRoleAttribute();
+    abstract Optional<String> getGroupRoleAttribute();
 
     /**
      * The group search base
      */
     @JsonProperty("groupSearchBase")
-    @Nullable
-    abstract String getGroupSearchBase();
+    abstract Optional<String> getGroupSearchBase();
 
     /**
      * The maximum group search depth limit
      */
     @JsonProperty("maxGroupSearchDepth")
-    @Nullable
-    abstract Integer getGroupSearchDepthLimit();
+    abstract Optional<Integer> getGroupSearchDepthLimit();
 
     /**
      * The group search filter
      */
     @JsonProperty("groupSearchFilter")
-    @Nullable
-    abstract String getGroupSearchFilter();
+    abstract Optional<String> getGroupSearchFilter();
 
     /**
      * The group search subtree
      */
     @JsonProperty("groupSearchSubTree")
-    @Nullable
-    abstract Boolean getGroupSearchSubTree();
+    abstract Optional<Boolean> getGroupSearchSubTree();
 
     /**
      * The group ignore partial search result flag
      */
     @JsonProperty("groupsIgnorePartialResults")
-    @Nullable
-    abstract Boolean getGroupsIgnorePartialResults();
+    abstract Optional<Boolean> getGroupsIgnorePartialResults();
 
     /**
      * The file to be used for group integration.
@@ -113,85 +105,73 @@ abstract class _LdapConfiguration extends AbstractExternalIdentityProviderConfig
      *
      */
     @JsonProperty("localPasswordCompare")
-    @Nullable
-    abstract Boolean getLocalPasswordCompare();
+    abstract Optional<Boolean> getLocalPasswordCompare();
 
     /**
      * The name of the LDAP attribute that contains the user’s email address
      */
     @JsonProperty("mailAttributeName")
-    @Nullable
-    abstract String getMailAttributeName();
+    abstract Optional<String> getMailAttributeName();
 
     /**
      * Defines an email pattern containing a {0} to generate an email address for an LDAP user during authentication
      */
     @JsonProperty("mailSubstitute")
-    @Nullable
-    abstract String getMailSubstitute();
+    abstract Optional<String> getMailSubstitute();
 
     /**
      * Set to true if you wish to override an LDAP user email address with a generated one
      */
     @JsonProperty("mailSubstituteOverridesLdap")
-    @Nullable
-    abstract Boolean getMailSubstituteOverridesLdap();
+    abstract Optional<Boolean> getMailSubstituteOverridesLdap();
 
     /**
      * The password attribute name
      */
     @JsonProperty("passwordAttributeName")
-    @Nullable
-    abstract String getPasswordAttributeName();
+    abstract Optional<String> getPasswordAttributeName();
 
     /**
      * The password encoder
      */
     @JsonProperty("passwordEncoder")
-    @Nullable
-    abstract String getPasswordEncoder();
+    abstract Optional<String> getPasswordEncoder();
 
     /**
      * Configures the UAA LDAP referral behavior. The following values are possible: - follow → Referrals are followed - ignore → Referrals are ignored and the partial result is returned - throw → An
      * error is thrown and the authentication is aborted
      */
     @JsonProperty("referral")
-    @Nullable
-    abstract String getReferral();
+    abstract Optional<String> getReferral();
 
     /**
      * Skips validation of the LDAP cert if set to true.
      */
     @JsonProperty("skipSSLVerification")
-    @Nullable
-    abstract Boolean getSkipSSLVerification();
+    abstract Optional<Boolean> getSkipSSLVerification();
 
     /**
      * The user distinguished name pattern
      */
     @JsonProperty("userDNPattern")
-    @Nullable
-    abstract String getUserDistinguishedNamePattern();
+    abstract Optional<String> getUserDistinguishedNamePattern();
 
     /**
      * The user distinguished name pattern delimiter
      */
     @JsonProperty("userDNPatternDelimiter")
-    @Nullable
-    abstract String getUserDistinguishedNamePatternDelimiter();
+    abstract Optional<String> getUserDistinguishedNamePatternDelimiter();
 
     /**
      * The user search base
      */
     @JsonProperty("userSearchBase")
-    @Nullable
-    abstract String getUserSearchBase();
+    abstract Optional<String> getUserSearchBase();
 
     /**
      * The user search filter
      */
     @JsonProperty("userSearchFilter")
-    @Nullable
-    abstract String getUserSearchFilter();
+    abstract Optional<String> getUserSearchFilter();
 
 }

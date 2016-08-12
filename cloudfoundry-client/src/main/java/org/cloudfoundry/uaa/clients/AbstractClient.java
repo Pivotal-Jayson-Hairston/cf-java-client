@@ -21,6 +21,7 @@ import org.cloudfoundry.Nullable;
 import org.cloudfoundry.uaa.tokens.GrantType;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The payload for Client responses
@@ -31,15 +32,13 @@ abstract class AbstractClient {
      * The access token validity
      */
     @JsonProperty("access_token_validity")
-    @Nullable
-    abstract Long getAccessTokenValidity();
+    abstract Optional<Long> getAccessTokenValidity();
 
     /**
      * The action
      */
     @JsonProperty("action")
-    @Nullable
-    abstract String getAction();
+    abstract Optional<String> getAction();
 
     /**
      * A list of origin keys (alias) for identity providers the client is limited to. Null implies any identity provider is allowed.
@@ -52,8 +51,7 @@ abstract class AbstractClient {
      * Were the approvals deleted for the client, and an audit event sent
      */
     @JsonProperty("approvals_deleted")
-    @Nullable
-    abstract Boolean getApprovalsDeleted();
+    abstract Optional<Boolean> getApprovalsDeleted();
 
     /**
      * Scopes that the client is able to grant when creating a client
@@ -83,8 +81,7 @@ abstract class AbstractClient {
      * What scope the bearer token had when client was created
      */
     @JsonProperty("createdwith")
-    @Nullable
-    abstract String getCreatedWith();
+    abstract Optional<String> getCreatedWith();
 
     /**
      * Epoch of the moment the client information was last altered
@@ -96,8 +93,7 @@ abstract class AbstractClient {
      * A human readable name for the client
      */
     @JsonProperty("name")
-    @Nullable
-    abstract String getName();
+    abstract Optional<String> getName();
 
     /**
      * Allowed URI patterns for redirect during authorization
@@ -110,8 +106,7 @@ abstract class AbstractClient {
      * The refresh token validity
      */
     @JsonProperty("refresh_token_validity")
-    @Nullable
-    abstract Long getRefreshTokenValidity();
+    abstract Optional<Long> getRefreshTokenValidity();
 
     /**
      * Resources the client is allowed access to
@@ -129,7 +124,6 @@ abstract class AbstractClient {
      * A random string used to generate the client’s revocation key. Change this value to revoke all active tokens for the client
      */
     @JsonProperty("token_salt")
-    @Nullable
-    abstract String getTokenSalt();
+    abstract Optional<String> getTokenSalt();
 
 }

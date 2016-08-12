@@ -25,6 +25,7 @@ import org.cloudfoundry.client.v2.serviceinstances.ServiceInstance;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The response payload for the Get Application Summary operation
@@ -44,36 +45,31 @@ abstract class _SummaryApplicationResponse extends AbstractApplicationEntity {
      * The detected buildpack
      */
     @JsonProperty("detected_buildpack")
-    @Nullable
-    abstract String getDetectedBuildpack();
+    abstract Optional<String> getDetectedBuildpack();
 
     /**
      * Whether SSH is enabled
      */
     @JsonProperty("enable_ssh")
-    @Nullable
-    abstract Boolean getEnableSsh();
+    abstract Optional<Boolean> getEnableSsh();
 
     /**
      * The id
      */
     @JsonProperty("guid")
-    @Nullable
-    abstract String getId();
+    abstract Optional<String> getId();
 
     /**
      * The package state
      */
     @JsonProperty("package_state")
-    @Nullable
-    abstract String getPackageState();
+    abstract Optional<String> getPackageState();
 
     /**
      * When the package was update
      */
     @JsonProperty("package_updated_at")
-    @Nullable
-    abstract String getPackageUpdatedAt();
+    abstract Optional<String> getPackageUpdatedAt();
 
     /**
      * The ports
@@ -93,8 +89,7 @@ abstract class _SummaryApplicationResponse extends AbstractApplicationEntity {
      * The running instances
      */
     @JsonProperty("running_instances")
-    @Nullable
-    abstract Integer getRunningInstances();
+    abstract Optional<Integer> getRunningInstances();
 
     /**
      * The services
@@ -107,7 +102,6 @@ abstract class _SummaryApplicationResponse extends AbstractApplicationEntity {
      * The version
      */
     @JsonProperty("version")
-    @Nullable
-    abstract String getVersion();
+    abstract Optional<String> getVersion();
 
 }

@@ -22,6 +22,7 @@ import org.cloudfoundry.uaa.IdentityZoned;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The request payload for the create group
@@ -33,8 +34,7 @@ abstract class _CreateGroupRequest implements IdentityZoned {
      * Human readable description of the group, displayed e.g. when approving scopes
      */
     @JsonProperty("description")
-    @Nullable
-    abstract String getDescription();
+    abstract Optional<String> getDescription();
 
     /**
      * The identifier specified upon creation of the group, unique within the identity zone

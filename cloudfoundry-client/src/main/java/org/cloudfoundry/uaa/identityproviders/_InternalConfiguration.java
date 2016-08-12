@@ -22,6 +22,7 @@ import org.cloudfoundry.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The payload for the internal identity provider configuration
@@ -34,8 +35,7 @@ abstract class _InternalConfiguration extends AbstractIdentityProviderConfigurat
      * When set to true, user management is disabled for this provider, defaults to false
      */
     @JsonProperty("disableInternalUserManagement")
-    @Nullable
-    abstract Boolean getDisableInternalUserManagement();
+    abstract Optional<Boolean> getDisableInternalUserManagement();
 
     /**
      * List of email domains associated with the provider for the purpose of associating users to the correct origin upon invitation. If empty list, no invitations are accepted. Wildcards supported.
@@ -48,21 +48,18 @@ abstract class _InternalConfiguration extends AbstractIdentityProviderConfigurat
      * The lockout policy
      */
     @JsonProperty("lockoutPolicy")
-    @Nullable
-    abstract LockoutPolicy getLockoutPolicy();
+    abstract Optional<LockoutPolicy> getLockoutPolicy();
 
     /**
      * The password policy
      */
     @JsonProperty("passwordPolicy")
-    @Nullable
-    abstract PasswordPolicy getPassswordPolicy();
+    abstract Optional<PasswordPolicy> getPassswordPolicy();
 
     /**
      * Human readable name/description of this provider
      */
     @JsonProperty("providerDescription")
-    @Nullable
-    abstract String getProviderDescription();
+    abstract Optional<String> getProviderDescription();
 
 }

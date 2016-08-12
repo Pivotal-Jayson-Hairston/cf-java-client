@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.Nullable;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The core entity response payload for Application resources
@@ -30,52 +31,45 @@ public abstract class AbstractApplicationEntity {
      * The buildpack
      */
     @JsonProperty("buildpack")
-    @Nullable
-    public abstract String getBuildpack();
+    public abstract Optional<String> getBuildpack();
 
     /**
      * The command
      */
     @JsonProperty("command")
-    @Nullable
-    public abstract String getCommand();
+    public abstract Optional<String> getCommand();
 
     /**
      * The console
      */
     @Deprecated
     @JsonProperty("console")
-    @Nullable
-    public abstract Boolean getConsole();
+    public abstract Optional<Boolean> getConsole();
 
     /**
      * Debug
      */
     @Deprecated
     @JsonProperty("debug")
-    @Nullable
-    public abstract Boolean getDebug();
+    public abstract Optional<Boolean> getDebug();
 
     /**
      * The detected start command
      */
     @JsonProperty("detected_start_command")
-    @Nullable
-    public abstract String getDetectedStartCommand();
+    public abstract Optional<String> getDetectedStartCommand();
 
     /**
      * Diego
      */
     @JsonProperty("diego")
-    @Nullable
-    public abstract Boolean getDiego();
+    public abstract Optional<Boolean> getDiego();
 
     /**
      * The disk quota in megabytes
      */
     @JsonProperty("disk_quota")
-    @Nullable
-    public abstract Integer getDiskQuota();
+    public abstract Optional<Integer> getDiskQuota();
 
     /**
      * The docker credentials JSONs
@@ -88,8 +82,7 @@ public abstract class AbstractApplicationEntity {
      * The docker image
      */
     @JsonProperty("docker_image")
-    @Nullable
-    public abstract String getDockerImage();
+    public abstract Optional<String> getDockerImage();
 
     /**
      * The environment JSONs
@@ -102,86 +95,74 @@ public abstract class AbstractApplicationEntity {
      * The health check timeout
      */
     @JsonProperty("health_check_timeout")
-    @Nullable
-    public abstract Integer getHealthCheckTimeout();
+    public abstract Optional<Integer> getHealthCheckTimeout();
 
     /**
      * The health check type
      */
     @JsonProperty("health_check_type")
-    @Nullable
-    public abstract String getHealthCheckType();
+    public abstract Optional<String> getHealthCheckType();
 
     /**
      * The instances
      */
     @JsonProperty("instances")
-    @Nullable
-    public abstract Integer getInstances();
+    public abstract Optional<Integer> getInstances();
 
     /**
      * The memory in megabytes
      */
     @JsonProperty("memory")
-    @Nullable
-    public abstract Integer getMemory();
+    public abstract Optional<Integer> getMemory();
 
     /**
      * The name
      */
     @JsonProperty("name")
-    @Nullable
-    public abstract String getName();
+    public abstract Optional<String> getName();
 
     /**
      * Production
      */
     @Deprecated
     @JsonProperty("production")
-    @Nullable
-    public abstract Boolean getProduction();
+    public abstract Optional<Boolean> getProduction();
 
     /**
      * The space id
      */
     @JsonProperty("space_guid")
-    @Nullable
-    public abstract String getSpaceId();
+    public abstract Optional<String> getSpaceId();
 
     /**
      * The stack id
      */
     @JsonProperty("stack_guid")
-    @Nullable
-    public abstract String getStackId();
+    public abstract Optional<String> getStackId();
 
     /**
      * The staging failed description
      */
     @JsonProperty("staging_failed_description")
-    @Nullable
-    public abstract String getStagingFailedDescription();
+    public abstract Optional<String> getStagingFailedDescription();
 
     /**
      * The staging failed reason
      */
     @JsonProperty("staging_failed_reason")
-    @Nullable
-    public abstract String getStagingFailedReason();
+    public abstract Optional<String> getStagingFailedReason();
 
     /**
      * The staging task id
      */
     @JsonProperty("staging_task_id")
-    @Nullable
-    public abstract String getStagingTaskId();
+    public abstract Optional<String> getStagingTaskId();
 
     /**
      * The state
      */
     @JsonProperty("state")
-    @Nullable
-    public abstract String getState();
+    public abstract Optional<String> getState();
 
 }
 

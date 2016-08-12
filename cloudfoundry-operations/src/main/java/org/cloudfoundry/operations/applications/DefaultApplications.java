@@ -497,7 +497,7 @@ public final class DefaultApplications implements Applications {
     }
 
     private static ApplicationEvent convertToApplicationEvent(EventResource resource) {
-        EventEntity entity = resource.getEntity();
+        EventEntity entity = ResourceUtils.getEntity(resource);
         Date timestamp = null;
         try {
             timestamp = DateUtils.parseFromIso8601(entity.getTimestamp());
@@ -655,9 +655,9 @@ public final class DefaultApplications implements Applications {
     }
 
     private static String getBuildpack(SummaryApplicationResponse response) {
-        return Optional
-            .ofNullable(response.getBuildpack())
-            .orElse(response.getDetectedBuildpack());
+        return response.getBuildpack()
+            .orElse(response.getDetectedBuildpack()
+                .orElse(null));
     }
 
     private static Mono<String> getDomainId(CloudFoundryClient cloudFoundryClient, String domain, String organizationId) {
@@ -681,13 +681,15 @@ public final class DefaultApplications implements Applications {
         if (Optional.ofNullable(recent).orElse(false)) {
             return requestLogsRecent(dopplerClient, applicationId)
                 .filter(e -> EventType.LOG_MESSAGE == e.getEventType())
-                .map(Envelope::getLogMessage)
+                .map(envelope -> envelope.getLogMessage()
+                    .orElseThrow(() -> new IllegalStateException("Log message missing")))
                 .collectSortedList(LOG_MESSAGE_COMPARATOR)
                 .flatMapIterable(d -> d);
         } else {
             return requestLogsStream(dopplerClient, applicationId)
                 .filter(e -> EventType.LOG_MESSAGE == e.getEventType())
-                .map(Envelope::getLogMessage)
+                .map(envelope -> envelope.getLogMessage()
+                    .orElseThrow(() -> new IllegalStateException("Log message missing")))
                 .compose(SortingUtils.timespan(LOG_MESSAGE_COMPARATOR, LOG_MESSAGE_TIMESPAN));
         }
     }
@@ -801,7 +803,7 @@ public final class DefaultApplications implements Applications {
 
     private static Mono<String> getStackName(CloudFoundryClient cloudFoundryClient, String stackId) {
         return requestStack(cloudFoundryClient, stackId)
-            .map(getStackResponse -> getStackResponse.getEntity().getName());
+            .map(response -> ResourceUtils.getEntity(response).getName());
     }
 
     private static boolean isIdentical(String s, String t) {
@@ -1231,7 +1233,7 @@ public final class DefaultApplications implements Applications {
             .name(summaryApplicationResponse.getName())
             .requestedState(summaryApplicationResponse.getState())
             .runningInstances(summaryApplicationResponse.getRunningInstances())
-            .stack(getStackResponse.getEntity().getName())
+            .stack(ResourceUtils.getEntity(getStackResponse).getName())
             .urls(urls)
             .build();
     }
@@ -1293,7 +1295,7 @@ public final class DefaultApplications implements Applications {
     }
 
     private static ApplicationHealthCheck toHealthCheck(AbstractApplicationResource resource) {
-        String type = resource.getEntity().getHealthCheckType();
+        String type = ResourceUtils.getEntity(resource).getHealthCheckType();
 
         if (ApplicationHealthCheck.NONE.getValue().equals(type)) {
             return ApplicationHealthCheck.NONE;

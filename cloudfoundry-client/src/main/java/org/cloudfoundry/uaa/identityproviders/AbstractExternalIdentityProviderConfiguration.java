@@ -20,12 +20,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 abstract class AbstractExternalIdentityProviderConfiguration extends AbstractIdentityProviderConfiguration {
 
     @JsonProperty("attributeMappings")
-    @Nullable
-    abstract AttributeMappings getAttributeMappings();
+    abstract Optional<AttributeMappings> getAttributeMappings();
 
     /**
      * The external group white list

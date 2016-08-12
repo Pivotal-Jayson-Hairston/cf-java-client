@@ -895,8 +895,6 @@ public final class ReactorApplicationsV3Test {
                     .lifecycle(Lifecycle.builder()
                         .type(org.cloudfoundry.client.v3.Type.BUILDPACK)
                         .data(BuildpackData.builder()
-                            .buildpack(null)
-                            .stack(null)
                             .build())
                         .build())
                     .stagingMemoryInMb(1024)
