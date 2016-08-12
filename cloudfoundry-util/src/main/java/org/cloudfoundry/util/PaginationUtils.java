@@ -19,7 +19,6 @@ package org.cloudfoundry.util;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -81,7 +80,7 @@ public final class PaginationUtils {
 
     private static <T> Function<T, Flux<T>> requestAdditionalPages(Function<Integer, Mono<T>> pageSupplier, Function<T, Integer> totalPagesSupplier) {
         return response -> {
-            Integer totalPages = Optional.ofNullable(totalPagesSupplier.apply(response)).orElse(1);
+            Integer totalPages = totalPagesSupplier.apply(response);
 
             return Flux
                 .range(2, totalPages - 1)
@@ -93,7 +92,7 @@ public final class PaginationUtils {
     }
 
     private static <T extends org.cloudfoundry.client.v2.PaginatedResponse<?>> Function<T, Flux<T>> requestClientV2AdditionalPages(Function<Integer, Mono<T>> pageSupplier) {
-        return requestAdditionalPages(pageSupplier, response -> response.getTotalPages());
+        return requestAdditionalPages(pageSupplier, response -> response.getTotalPages().orElse(1));
     }
 
     private static <T extends org.cloudfoundry.client.v3.PaginatedResponse<?>> Function<T, Flux<T>> requestClientV3AdditionalPages(Function<Integer, Mono<T>> pageSupplier) {

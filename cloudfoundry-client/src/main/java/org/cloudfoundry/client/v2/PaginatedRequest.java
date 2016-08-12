@@ -16,8 +16,9 @@
 
 package org.cloudfoundry.client.v2;
 
-import org.cloudfoundry.Nullable;
 import org.cloudfoundry.QueryParameter;
+
+import java.util.Optional;
 
 /**
  * Base class for requests that are paginated
@@ -27,22 +28,19 @@ public abstract class PaginatedRequest {
     /**
      * The order direction
      */
-    @Nullable
     @QueryParameter("order-direction")
-    public abstract OrderDirection getOrderDirection();
+    public abstract Optional<OrderDirection> getOrderDirection();
 
     /**
      * The page
      */
-    @Nullable
     @QueryParameter("page")
-    public abstract Integer getPage();
+    public abstract Optional<Integer> getPage();
 
     /**
      * The results per page
      */
-    @Nullable
     @QueryParameter("results-per-page")
-    public abstract Integer getResultsPerPage();
+    public abstract Optional<Integer> getResultsPerPage();
 
 }

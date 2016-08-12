@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@OptionalListEnabled
+//@OptionalListEnabled
 @Value.Style(
     add = "*",
     defaults = @Value.Immutable(copy = false),
@@ -27,6 +27,5 @@
 )
 package org.cloudfoundry;
 
-import org.cloudfoundry.immutables.OptionalListEnabled;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Style.ImplementationVisibility;
